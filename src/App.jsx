@@ -6,10 +6,10 @@ import store from './redux/store';
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <GlobalStyle />
       <RouterProvider router={router} />
-    </>
+    </Provider>
   );
 }
 
