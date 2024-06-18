@@ -1,3 +1,4 @@
+import SmallCoffeeBean from '../common/Icon/CoffeeBean/CoffeeBean';
 import {
   CardHashtagItem,
   CardHashtagSection,
@@ -6,7 +7,9 @@ import {
   CardTargetCafeAddress,
   CardTopSection,
   MainPageCardContainer,
-  MainPageCardItem
+  MainPageCardItem,
+  Rating,
+  RatingNumber
 } from './MainPageCardListSection.style';
 
 const MainPageCardListSection = () => {
@@ -22,6 +25,10 @@ const MainPageCardListSection = () => {
         <CardTopSection>
           <CardTargetCafe>100 sheets</CardTargetCafe>
           <CardTargetCafeAddress>대전광역시 중구 대흥동</CardTargetCafeAddress>
+          <Rating>
+            <SmallCoffeeBean size={24} />
+            <RatingNumber>5.0</RatingNumber>
+          </Rating>
         </CardTopSection>
         <CardHashtagSection>
           <CardHashtagItem>디저트 맛집</CardHashtagItem>

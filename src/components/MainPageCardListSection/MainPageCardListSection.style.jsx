@@ -36,6 +36,12 @@ export const CardTargetCafeAddress = styled.p`
   color: #5d442c;
 `;
 
+export const Rating = styled.div`
+  display: flex;
+`;
+
+export const RatingNumber = styled.p``;
+
 export const CardHashtagSection = styled.section`
   display: flex;
   margin: 10px auto auto 28px;
