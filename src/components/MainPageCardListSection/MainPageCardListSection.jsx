@@ -26,43 +26,10 @@ const MainPageCardListSection = () => {
           <CardTargetCafe>100 sheets</CardTargetCafe>
           <CardTargetCafeAddress>대전광역시 중구 대흥동</CardTargetCafeAddress>
           <Rating>
-            <SmallCoffeeBean size={24} />
-            <RatingNumber>5.0</RatingNumber>
+            <SmallCoffeeBean size={30} />
+            <RatingNumber>5</RatingNumber>
           </Rating>
         </CardTopSection>
-        <CardHashtagSection>
-          <CardHashtagItem>디저트 맛집</CardHashtagItem>
-          <CardHashtagItem>데이트 명소</CardHashtagItem>
-        </CardHashtagSection>
-        <CardReviewText>{sampleText}</CardReviewText>
-      </MainPageCardItem>
-      <MainPageCardItem>
-        <div style={{ display: 'flex', margin: '35px 0px 10px 30px', gap: `15px`, alignItems: 'baseline' }}>
-          <CardTargetCafe>100 sheets</CardTargetCafe>
-          <CardTargetCafeAddress>대전광역시 중구 대흥동</CardTargetCafeAddress>
-        </div>
-        <CardHashtagSection>
-          <CardHashtagItem>디저트 맛집</CardHashtagItem>
-          <CardHashtagItem>데이트 명소</CardHashtagItem>
-        </CardHashtagSection>
-        <CardReviewText>{sampleText}</CardReviewText>
-      </MainPageCardItem>
-      <MainPageCardItem>
-        <div style={{ display: 'flex', margin: '35px 0px 10px 30px', gap: `15px`, alignItems: 'baseline' }}>
-          <CardTargetCafe>100 sheets</CardTargetCafe>
-          <CardTargetCafeAddress>대전광역시 중구 대흥동</CardTargetCafeAddress>
-        </div>
-        <CardHashtagSection>
-          <CardHashtagItem>디저트 맛집</CardHashtagItem>
-          <CardHashtagItem>데이트 명소</CardHashtagItem>
-        </CardHashtagSection>
-        <CardReviewText>{sampleText}</CardReviewText>
-      </MainPageCardItem>
-      <MainPageCardItem>
-        <div style={{ display: 'flex', margin: '35px 0px 10px 30px', gap: `15px`, alignItems: 'baseline' }}>
-          <CardTargetCafe>100 sheets</CardTargetCafe>
-          <CardTargetCafeAddress>대전광역시 중구 대흥동</CardTargetCafeAddress>
-        </div>
         <CardHashtagSection>
           <CardHashtagItem>디저트 맛집</CardHashtagItem>
           <CardHashtagItem>데이트 명소</CardHashtagItem>

@@ -38,9 +38,15 @@ export const CardTargetCafeAddress = styled.p`
 
 export const Rating = styled.div`
   display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: auto 35px auto auto;
 `;
 
-export const RatingNumber = styled.p``;
+export const RatingNumber = styled.p`
+  font-weight: bold;
+  font-size: 1.2rem;
+`;
 
 export const CardHashtagSection = styled.section`
   display: flex;
