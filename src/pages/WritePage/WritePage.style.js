@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const BoardSection = styled.div`
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 3px solid #ccc;
   border-radius: 4px;
   transition: all 0.3s ease;
 
@@ -11,7 +11,9 @@ export const BoardSection = styled.div`
 export const SectionTitle = styled.h1`
   font-size: 24px;
   font-weight: bold;
+  color: #4D2C0E;
   margin-bottom: 20px;
+  text-align: center;
 `;
 
 export const TitleDiv = styled.div`
@@ -43,13 +45,10 @@ export const Input = styled.input`
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: none; 
+  border-radius: 20px; 
   outline: none;
-
-  &:focus {
-    border-color: #4CAF50;
-  }
+  background-color: #EFEFEF;
 `;
 
 export const ButtonContainer = styled.div`
@@ -58,7 +57,7 @@ export const ButtonContainer = styled.div`
 `;
 
 export const CreateBtn = styled.button`
-  background-color: #4CAF50;
+background-color: #4D2C0E;
   color: #fff;
   border: none;
   border-radius: 4px;
