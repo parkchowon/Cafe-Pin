@@ -40,11 +40,11 @@ export const CardHashtagItem = styled.div`
   border-color: #dbc5b1;
   border-style: solid;
   background-color: #dbc5b1;
-  padding: 3px 15px;
+  padding: 3px 13px;
   border-radius: 19px;
   color: white;
-  font-weight: bold;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 0.9rem;
 `;
 
 export const CardReviewText = styled.p`
@@ -55,7 +55,8 @@ export const CardReviewText = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  height: 45px;
+  height: 42px;
+  line-height: 120%;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;

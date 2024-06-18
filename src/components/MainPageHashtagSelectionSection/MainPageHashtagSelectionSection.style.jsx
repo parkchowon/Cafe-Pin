@@ -4,7 +4,7 @@ export const HashtagSelectionSection = styled.section`
   display: flex;
   justify-content: space-between;
   width: 50%;
-  margin: 20px auto 0px auto;
+  margin: 30px auto 0px auto;
 
   &:hover {
     cursor: pointer;

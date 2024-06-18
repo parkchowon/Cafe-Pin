@@ -9,7 +9,7 @@ function HomePage() {
     <>
       <MainPageSearchSection></MainPageSearchSection>
       <MainPageHashtagSelectionSection></MainPageHashtagSelectionSection>
-      <div style={{ display: 'flex', width: '65%', margin: '70px auto 0px auto', alignItems: 'center' }}>
+      <div style={{ display: 'flex', width: '65%', margin: '50px auto 0px auto', alignItems: 'center' }}>
         <MainPageCurrentHashtagTextSection></MainPageCurrentHashtagTextSection>
         <MainPageAddReviewButton>리뷰 작성하기</MainPageAddReviewButton>
       </div>

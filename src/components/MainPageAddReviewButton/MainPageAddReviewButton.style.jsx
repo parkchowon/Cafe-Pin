@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const StyledDiv = styled.div`
   margin-left: auto;
-  font-weight: 900;
-  font-size: 1.2rem;
+  font-weight: 600;
+  font-size: 1rem;
   padding: 5px 20px;
   border-width: 2.25pt;
   border-style: solid;
