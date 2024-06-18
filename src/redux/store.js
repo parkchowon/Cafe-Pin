@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import postSlice from './slices/postSlice';
+import hashtagSlice from './slices/hashtagSlice';
 
 const store = configureStore({
   reducer: {
-    post: postSlice
+    post: postSlice,
+    hashtag: hashtagSlice
   }
 });
 
