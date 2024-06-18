@@ -33,21 +33,21 @@ export const CafeSearchInputSection = styled.section`
 `;
 
 export const MapIcon = styled.div`
-  background-image: url('src/assets/mapicon.png');
+  background-image: url('src/components/common/Icon/MapIcon.png');
   background-size: contain;
   width: 64px;
   height: 64px;
   margin: auto 0px 0px 0px;
   transition: 0.3s;
   &:hover {
-    background-image: url('src/assets/mapicon_hover.png');
+    background-image: url('src/components/common/Icon/MapIcon_hover.png');
     cursor: pointer;
     transition: 0.3s;
   }
 `;
 
 export const SearchIcon = styled.img`
-  src: 'src/assets/searchIcon.png';
+  src: 'src/components/common/Icon/SearchIcon.png';
   &:hover {
     cursor: pointer;
   }

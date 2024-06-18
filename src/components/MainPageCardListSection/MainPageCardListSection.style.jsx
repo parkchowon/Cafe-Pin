@@ -4,7 +4,7 @@ export const MainPageCardContainer = styled.section`
   display: flex;
   flex-direction: column;
   width: 65%;
-  margin: 30px auto 0px auto;
+  margin: 30px auto 50px auto;
   gap: 35px;
 `;
 
@@ -13,6 +13,13 @@ export const MainPageCardItem = styled.div`
   height: 190px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 23.5px;
   border-radius: 25px;
+`;
+
+export const CardTopSection = styled.div`
+  display: flex;
+  margin: 35px 0px 10px 30px;
+  gap: 15px;
+  align-items: baseline;
 `;
 
 export const CardTargetCafe = styled.p`
