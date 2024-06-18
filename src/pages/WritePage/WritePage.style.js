@@ -6,10 +6,12 @@ export const BoardSection = styled.div`
   border-radius: 4px;
   transition: all 0.3s ease;
 
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+`;
+
+export const SectionTitle = styled.h1`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
 `;
 
 export const TitleDiv = styled.div`
