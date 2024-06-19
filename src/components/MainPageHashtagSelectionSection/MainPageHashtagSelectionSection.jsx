@@ -5,6 +5,10 @@ import { INITIAL_SWITCH_HASHTAG_ONOFF, SWITCH_HASHTAG_ONOFF } from '../../redux/
 const MainPageHashtagSelectionSection = () => {
   const dispatch = useDispatch();
 
+  const isFirstClick = useSelector((state) => {
+    return state.hashtag.firstHashtagClick;
+  });
+
   const hashtagState = useSelector((state) => {
     return state.hashtag.hashtagStates;
   });
@@ -12,11 +16,7 @@ const MainPageHashtagSelectionSection = () => {
   const hashtags = Object.keys(hashtagState);
 
   const handleHashtagClick = (event) => {
-    if (
-      Object.values(hashtagState).every((value) => {
-        return value === true;
-      })
-    ) {
+    if (isFirstClick) {
       dispatch(INITIAL_SWITCH_HASHTAG_ONOFF(event.target.id));
     } else {
       dispatch(SWITCH_HASHTAG_ONOFF(event.target.id));

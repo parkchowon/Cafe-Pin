@@ -10,7 +10,7 @@ export const CafeSearchInputSection = styled.section`
   border-radius: 60px;
   width: 50%;
   margin-top: 50px;
-  margin-right: 85px;
+  margin-right: 0px;
   input {
     width: 70%;
     border-style: none;
@@ -37,7 +37,7 @@ export const MapIcon = styled.div`
   background-size: contain;
   width: 64px;
   height: 64px;
-  margin: auto 0px 0px 0px;
+  margin: auto 0px 0px 52px;
   transition: 0.3s;
   &:hover {
     background-image: url('src/components/common/Icon/MapIcon_hover.png');
@@ -47,7 +47,6 @@ export const MapIcon = styled.div`
 `;
 
 export const SearchIcon = styled.img`
-  src: 'src/components/common/Icon/SearchIcon.png';
   &:hover {
     cursor: pointer;
   }

@@ -18,6 +18,8 @@ const MainPageCurrentHashtagTextSection = () => {
       <CurrentHashtagTextContainer>
         {selectedHashtagsArray.length === 6 ? (
           <CurrentHashtagTextItem>#전체보기</CurrentHashtagTextItem>
+        ) : selectedHashtagsArray.length === 0 ? (
+          <CurrentHashtagTextItem>#해시태그 없음</CurrentHashtagTextItem>
         ) : (
           selectedHashtagsArray.map((hashtag) => {
             return <CurrentHashtagTextItem key={hashtag}>#{hashtag}</CurrentHashtagTextItem>;

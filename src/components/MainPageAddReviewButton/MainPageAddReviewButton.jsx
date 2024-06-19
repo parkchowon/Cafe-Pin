@@ -1,7 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import { StyledDiv } from './MainPageAddReviewButton.style';
 
 const MainPageAddReviewButton = () => {
-  return <StyledDiv>{`+ 리뷰 작성`}</StyledDiv>;
+  const navigate = useNavigate();
+  return (
+    <StyledDiv
+      onClick={() => {
+        navigate('/write');
+      }}
+    >{`+ 리뷰 작성`}</StyledDiv>
+  );
 };
 
 export default MainPageAddReviewButton;
