@@ -8,7 +8,8 @@ const mapSlice = createSlice({
       lat: 33.450701,
       lng: 126.570667
     },
-    searchText: ''
+    searchText: '',
+    cafeList: []
   },
   reducers: {
     changeCenter: (state, action) => {
@@ -17,10 +18,13 @@ const mapSlice = createSlice({
     },
     searchThisText: (state, action) => {
       state.searchText = action.payload;
+    },
+    mapCafeList: (state, action) => {
+      state.cafeList = action.payload;
     }
   }
 });
 
-export const { changeCenter, searchThisText } = mapSlice.actions;
+export const { changeCenter, searchThisText, mapCafeList } = mapSlice.actions;
 
 export default mapSlice.reducer;

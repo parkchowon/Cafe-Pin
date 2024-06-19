@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 `;
 
 export const SearchDiv = styled.div`
-  width: 1200px;
+  max-width: 1200px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

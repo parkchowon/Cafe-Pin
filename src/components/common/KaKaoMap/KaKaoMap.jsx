@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Circle, Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCenter } from '../../../redux/slices/mapSlice';
+import { changeCenter, mapCafeList } from '../../../redux/slices/mapSlice';
 import { MapContainer } from './KaKaoMap.style';
 
 function KaKaoMap(data) {
   useKakaoLoader();
+  const mapRef = useRef(null);
   const dispatch = useDispatch();
 
   const text = useSelector((state) => state.map.searchText);
@@ -61,6 +62,7 @@ function KaKaoMap(data) {
 
     ps.keywordSearch(text, (data, status) => {
       if (status === window.kakao.maps.services.Status.OK) {
+        console.log(data);
         const changeData = {
           level: level,
           position: {
@@ -79,6 +81,29 @@ function KaKaoMap(data) {
     });
   }, [text]);
 
+  const makeCafeList = () => {
+    const ps = new window.kakao.maps.services.Places();
+    ps.categorySearch(
+      'CE7',
+      (data, status) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          return dispatch(mapCafeList(data));
+        }
+      },
+      {
+        radius: length,
+        location: new window.kakao.maps.LatLng(position.lat, position.lng)
+      }
+    );
+  };
+
+  useEffect(() => {
+    const debouncing = setTimeout(() => {
+      makeCafeList();
+    }, 300);
+
+    return () => clearTimeout(debouncing);
+  }, [position]);
   return (
     <MapContainer>
       <Map
@@ -91,6 +116,7 @@ function KaKaoMap(data) {
           width: `${data.width}px`,
           height: `${data.height}px`
         }}
+        ref={mapRef}
         level={3}
         draggable={data.draggable}
         onCenterChanged={handleCenterClick}
