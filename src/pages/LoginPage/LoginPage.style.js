@@ -22,9 +22,9 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-family: 'Brush Script MT', cursive;
-  margin-bottom: 15px;
-  font-size: 36px;
+  margin-left: 10px;
+    font-family: 'Playwrite CO', cursive;
+    font-size: 32px;
 `;
 
 export const Form = styled.form`
@@ -35,11 +35,13 @@ export const Form = styled.form`
   background-color: #fff;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 23.5px; */
 `;
 
 export const Label = styled.label`
-  font-size: 16px;
+  font-size: 12px;
+  margin-bottom: 2px;
+  margin-left: 20px;
   color: #808080;
 `;
 
@@ -49,15 +51,18 @@ export const Input = styled.input`
   padding: 5px;
   padding-left: 15px;
   margin-bottom: 15px;
-  font-size: 16px;
+  font-size: 14px;
   border: none;
   border-radius: 100px;
   background-color: #EFEFEF;
   color: #808080;
+  box-sizing: border-box;
+
 `;
 
-export const H1 = styled.text`
-margin-bottom: 8px;
+export const H1 = styled.h1`
+margin-bottom: 15px;
+margin-top: 10px;
   font-size: 15px;
   text-align: center;
   color: #808080;
@@ -66,20 +71,24 @@ margin-bottom: 8px;
 export const SocialLoginContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 `;
 
 export const SocialButton = styled.button`
   width: 65px;
   height: 65px;
   border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 23.5px;
   border: none;
   margin: 0 15px;
+  background-color: white;
+
   cursor: pointer;
-  background-color: #ccc;
 
   &:hover {
-    background-color: #bbb;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 23.5px;
+
   }
 `;
 
