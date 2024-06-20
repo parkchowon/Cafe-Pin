@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MainPageCardArrangeDropdown from '../../components/MainPageCardArrangeDropdown';
 import MainPageCardListSection from '../../components/MainPageCardListSection';
 import MainPageCurrentHashtagTextSection from '../../components/MainPageCurrentHashtagTextSection';
@@ -6,13 +6,12 @@ import { MainPageHashtagDropdownContainer } from '../../components/MainPageCurre
 import MainPageHashtagSelectionSection from '../../components/MainPageHashtagSelectionSection';
 import MainPageSearchSection from '../../components/MainPageSearchSection';
 import { useEffect } from 'react';
+import { SET_CAFE_SEARCH_TEXT } from '../../redux/slices/cafeSearchTextSlice';
 
 function HomePage() {
-  const aaa = useSelector((state) => {
-    return state.isLoggedIn.isLoggedIn;
-  });
+  const dispatch = useDispatch();
   useEffect(() => {
-    console.log(aaa);
+    dispatch(SET_CAFE_SEARCH_TEXT(''));
   });
   return (
     <>

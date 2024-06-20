@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const LoadingDiv = styled.div`
+  text-align: center;
   width: 200px;
   margin: 200px auto 0 auto;
 `;
 
 export const ErrorDiv = styled.div`
+  text-align: center;
   width: 200px;
   margin: 200px auto 0 auto;
 `;

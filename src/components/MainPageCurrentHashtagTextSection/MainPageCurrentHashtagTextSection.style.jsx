@@ -11,36 +11,54 @@ export const MainPageHashtagDropdownContainer = styled.div`
 `;
 
 export const CurrentHashtagTextContainer = styled.section`
-  display: grid;
+  display: flex;
   justify-content: start;
 
   min-width: 350px;
 
-  @media (min-width: 1790px) {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    font-size: 1.7rem;
+  @media (min-width: 900px) {
+    gap: 10px;
+    flex-direction: row;
+    align-items: flex-end;
   }
 
-  @media (max-width: 1790px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    font-size: 1.7rem;
-  }
-
-  @media (max-width: 1140px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    font-size: 1.4rem;
-  }
-  @media (max-width: 895px) {
-    display: none;
+  @media (max-width: 900px) {
+    gap: 5px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;
 
-export const CurrentHashtagTextItem = styled.p`
+export const AddressText = styled.p`
   font-weight: 900;
 
   color: #4d2c0e;
   margin: 10px 0 0 0;
+  font-size: 1.7rem;
+`;
+
+export const PlainTextExitIconContainer = styled.div`
+  display: flex;
+  align-items: flex-end;
+  @media (min-width: 900px) {
+    gap: 10px;
+  }
+
+  @media (max-width: 900px) {
+    gap: 5px;
+  }
+`;
+
+export const PlainText = styled.p`
+  font-weight: 700;
+
+  color: grey;
+  margin: 10px 0 0 0;
+  font-size: 1.4rem;
+`;
+
+export const ExitIcon = styled.img`
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
 `;

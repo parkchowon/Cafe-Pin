@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import arrangeOptionSlice from './slices/arrangeOptionSlice';
-import isLoggedInSlice from './slices/isLoggedInSlice';
+import cafeSearchTextSlice from './slices/cafeSearchTextSlice';
 import hashtagSlice from './slices/hashtagSlice';
+import isLoggedInSlice from './slices/isLoggedInSlice';
 import mapSlice from './slices/mapSlice';
 
 const store = configureStore({
@@ -9,7 +10,8 @@ const store = configureStore({
     hashtag: hashtagSlice,
     arrangeOption: arrangeOptionSlice,
     isLoggedIn: isLoggedInSlice,
-    map: mapSlice
+    map: mapSlice,
+    cafeSearchText: cafeSearchTextSlice
   }
 });
 
