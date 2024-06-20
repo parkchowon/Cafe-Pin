@@ -17,7 +17,7 @@ export const SearchDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 0 10px 0;
+  padding: 10px 0 10px 0;
   form {
     display: flex;
     flex-direction: row;
@@ -79,5 +79,19 @@ export const MyLocationBtn = styled.button`
   }
   &:hover {
     background-color: #4d2c0e;
+  }
+`;
+
+export const TitleDiv = styled.div`
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1%;
+  p {
+    font-size: 25px;
+    font-weight: 600;
+    color: #4d2c0e;
   }
 `;
