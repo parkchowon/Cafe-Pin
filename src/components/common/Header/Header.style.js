@@ -42,9 +42,22 @@ export const User = styled.div`
     background-color: #efefef;
     border-radius: 50%;
     margin-left: 25px;
+    border: transparent;
   }
 `;
 
-export const ProfileImg = styled.div`
+export const ProfileImg = styled.img`
+  cursor: pointer;
+`;
+
+export const ProfileDiv = styled.div`
+  width: 50px;
+  height: 50px;
+  background-color: #efefef;
+  border-radius: 50%;
+  margin-left: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 `;

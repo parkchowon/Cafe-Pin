@@ -11,6 +11,7 @@ const mapSlice = createSlice({
     searchText: '',
     cafeList: [],
     selectedCafeData: {},
+    isMarkerOpen: false,
     address: '',
     viewAll: true
   },
@@ -31,6 +32,10 @@ const mapSlice = createSlice({
     setCafeData: (state, action) => {
       state.selectedCafeData = action.payload;
     },
+
+    setMarkerOpen: (state, action) => {
+      state.isMarkerOpen = action.payload;
+    },
     ViewSpecificRegionRange: (state) => {
       state.viewAll = false;
     },
@@ -47,7 +52,8 @@ export const {
   setCafeData,
   setCurrentPositionAddress,
   ViewSpecificRegionRange,
-  ViewAllRegion
+  ViewAllRegion,
+  setMarkerOpen
 } = mapSlice.actions;
 
 export default mapSlice.reducer;
