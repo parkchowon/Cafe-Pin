@@ -10,7 +10,7 @@ const store = configureStore({
     post: postSlice,
     hashtag: hashtagSlice,
     arrangeOption: arrangeOptionSlice,
-    isLoggedIn: isLoggedInSlice
+    isLoggedIn: isLoggedInSlice,
     map: mapSlice
   }
 });
