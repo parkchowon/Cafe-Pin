@@ -9,7 +9,7 @@ import PostPage from '../pages/PostPage';
 import SelectCafePage from '../pages/SelectCafePage/SelectCafePage';
 import SignUpPage from '../pages/SignUpPage';
 import WritePage from '../pages/WritePage';
-
+import OAuthRedirectPage from '../pages/OAuthRedirectPage/OAuthRedirectPage';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -38,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: 'select-cafe',
         element: <SelectCafePage />
+      },
+      {
+        path: 'auth/OAuthRedirectPage',
+        element: <OAuthRedirectPage />
       }
     ]
   },
