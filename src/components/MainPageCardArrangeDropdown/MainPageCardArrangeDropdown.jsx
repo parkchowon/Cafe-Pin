@@ -25,13 +25,13 @@ const MainPageCardArrangeDropdown = () => {
   });
 
   const handleClickArrangeToLatest = () => {
-    queryClient.invalidateQueries(['fetchReviewsByLatest']);
     dispatch(SWITCH_ARRANGE_TO_LATEST());
+    queryClient.invalidateQueries(['fetchReviews']);
   };
 
   const handleClickArrangeToOldest = () => {
-    queryClient.invalidateQueries(['fetchReviewsByOldest']);
     dispatch(SWITCH_ARRANGE_TO_OLDEST());
+    queryClient.invalidateQueries(['fetchReviews']);
   };
 
   return (

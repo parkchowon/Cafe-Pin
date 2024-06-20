@@ -1,23 +1,43 @@
 /* eslint-disable react/no-unknown-property */
 import { useNavigate } from 'react-router-dom';
-import { CafeSearchInputSection, MapIcon, SearchIcon } from './MainPageSearchSection.style';
+import {
+  CafeSearchInputSection,
+  MainPageSearchSectionContainer,
+  MapIcon,
+  SearchIcon
+} from './MainPageSearchSection.style';
 import MainPageAddReviewButton from '../MainPageAddReviewButton';
+import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { SET_CAFE_SEARCH_TEXT } from '../../redux/slices/cafeSearchTextSlice';
 
 const MainPageSearchSection = () => {
+  const inputValueRef = useRef();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const handleEnterKeyOnInput = (event) => {
+    if (event.key === 'Enter') {
+      dispatch(SET_CAFE_SEARCH_TEXT(inputValueRef.current.value));
+    }
+  };
   return (
-    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center' }}>
+    <MainPageSearchSectionContainer>
       <MapIcon
         onClick={() => {
           navigate('/search');
         }}
       />
       <CafeSearchInputSection>
-        <input placeholder="리뷰를 알고 싶은 카페를 검색!" />
-        <SearchIcon src="src/components/common/Icon/SearchIcon.png" />
+        <input placeholder="리뷰를 볼 카페를 검색!" onKeyDown={handleEnterKeyOnInput} ref={inputValueRef} />
+        <SearchIcon
+          src="src/components/common/Icon/SearchIcon.png"
+          onClick={() => {
+            dispatch(SET_CAFE_SEARCH_TEXT(inputValueRef.current.value));
+          }}
+        />
       </CafeSearchInputSection>
       <MainPageAddReviewButton></MainPageAddReviewButton>
-    </div>
+    </MainPageSearchSectionContainer>
   );
 };
 

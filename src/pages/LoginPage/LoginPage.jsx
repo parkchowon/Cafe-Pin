@@ -13,11 +13,9 @@ import {
   Button,
   SignUpLink
 } from './LoginPage.style';
-import GoogleLogo from '../../components/common/Icon/GoogleLogo';
-import GithubLogo from '../../components/common/Icon/GithubLogo';
 import KakaotalkLogo from '../../components/common/Icon/KakaotalkLogo';
 import supabase from '../../apis/supabase';
-import { logInWithGithub, logInWithKakao } from '../../apis/loginPage.api';
+import { logInWithKakao } from '../../apis/OAuthPage.api';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -47,7 +45,7 @@ const LoginPage = () => {
     }
 
     alert('로그인 성공');
-    // navigate('/');
+    navigate('/');
   };
 
   return (
@@ -61,12 +59,6 @@ const LoginPage = () => {
           <Input type="password" name="password" placeholder="비밀번호는 6자 이상 입력하세요" required />
           <H1>SNS 로그인</H1>
           <SocialLoginContainer>
-            <SocialButton>
-              <GoogleLogo />
-            </SocialButton>
-            <SocialButton onClick={logInWithGithub}>
-              <GithubLogo />
-            </SocialButton>
             <SocialButton onClick={logInWithKakao}>
               <KakaotalkLogo />
             </SocialButton>

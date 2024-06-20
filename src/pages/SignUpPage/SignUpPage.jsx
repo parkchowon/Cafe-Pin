@@ -1,21 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Wrapper,
-  Container,
-  Title,
-  Form,
-  Label,
-  Input,
-  H1,
-  SocialLoginContainer,
-  SocialButton,
-  Button,
-  LoginLink
-} from './SignUpPage.style';
-import GoogleLogo from '../../components/common/Icon/GoogleLogo/GoogleLogo';
-import GithubLogo from '../../components/common/Icon/GithubLogo/GithubLogo';
-import KakaotalkLogo from '../../components/common/Icon/KakaotalkLogo';
+import { Wrapper, Container, Title, Form, Label, Input, Button, LoginLink } from './SignUpPage.style';
 import supabase from '../../apis/supabase';
 
 const SignUpPage = () => {
@@ -96,18 +81,6 @@ const SignUpPage = () => {
           <Input type="password" placeholder="비밀번호는 6자 이상 입력하세요" />
           <Label htmlFor="passwordConfirm ">비밀번호 확인</Label>
           <Input type="password" placeholder="비밀번호를 다시 입력하세요" />
-          <H1>SNS 회원가입</H1>
-          <SocialLoginContainer>
-            <SocialButton>
-              <GoogleLogo />
-            </SocialButton>
-            <SocialButton>
-              <GithubLogo />
-            </SocialButton>
-            <SocialButton>
-              <KakaotalkLogo />
-            </SocialButton>
-          </SocialLoginContainer>
           <Button type="submit">가입하기</Button>
           <LoginLink to="/auth/login">이미 가입한 계정이 있으신가요?</LoginLink>
         </Form>
