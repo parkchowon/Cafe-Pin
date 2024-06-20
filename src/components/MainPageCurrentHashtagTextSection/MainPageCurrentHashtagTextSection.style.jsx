@@ -56,9 +56,3 @@ export const PlainText = styled.p`
   margin: 10px 0 0 0;
   font-size: 1.4rem;
 `;
-
-export const ExitIcon = styled.img`
-  height: 20px;
-  width: 20px;
-  cursor: pointer;
-`;
