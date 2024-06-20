@@ -28,8 +28,12 @@ const MainPageRegionFilterTextSection = () => {
       <CurrentHashtagTextContainer>
         <AddressText>{viewAll ? '전체보기' : `${currentPositionAddress}`}</AddressText>
         <PlainTextExitIconContainer>
-          <PlainText>에서 검색 중</PlainText>
-          <ExitIcon src="src\components\common\Icon\ExitIcon.png" onClick={handleClickExitRegionFilterIcon} />
+          <PlainText>{viewAll ? '' : `에서 검색 중`}</PlainText>
+          {viewAll ? (
+            <></>
+          ) : (
+            <ExitIcon src="src\components\common\Icon\ExitIcon.png" onClick={handleClickExitRegionFilterIcon} />
+          )}
         </PlainTextExitIconContainer>
       </CurrentHashtagTextContainer>
     </>

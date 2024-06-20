@@ -38,6 +38,10 @@ const MainPageCardListSection = () => {
     return state.hashtag.hashtagStates;
   });
 
+  const cafeSearchText = useSelector((state) => {
+    return state.cafeSearchText.cafeSearchText;
+  });
+
   const onlyTrueHashtagObj = {};
 
   Object.keys(hashtagObj).forEach((hashtag) => {
@@ -53,12 +57,12 @@ const MainPageCardListSection = () => {
   } = useQuery({
     queryKey:
       reviewsArrangeOption === 'latest'
-        ? ['fetchReviewsByLatest', onlyTrueHashtagObj, idsOfCafesInMap, viewAll]
-        : ['fetchReviewsByOldest', onlyTrueHashtagObj, idsOfCafesInMap, viewAll],
+        ? ['fetchReviewsByLatest', onlyTrueHashtagObj, idsOfCafesInMap, viewAll, cafeSearchText]
+        : ['fetchReviewsByOldest', onlyTrueHashtagObj, idsOfCafesInMap, viewAll, cafeSearchText],
     queryFn:
       reviewsArrangeOption === 'latest'
-        ? () => fetchReviewsByLatest(onlyTrueHashtagObj, idsOfCafesInMap, viewAll)
-        : () => fetchReviewsByOldest(onlyTrueHashtagObj, idsOfCafesInMap, viewAll)
+        ? () => fetchReviewsByLatest(onlyTrueHashtagObj, idsOfCafesInMap, viewAll, cafeSearchText)
+        : () => fetchReviewsByOldest(onlyTrueHashtagObj, idsOfCafesInMap, viewAll, cafeSearchText)
   });
   const navigate = useNavigate();
   if (isPending) {
