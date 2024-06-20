@@ -33,6 +33,9 @@ const mapSlice = createSlice({
     },
     ViewSpecificRegionRange: (state) => {
       state.viewAll = false;
+    },
+    ViewAllRegion: (state) => {
+      state.viewAll = true;
     }
   }
 });
@@ -43,7 +46,8 @@ export const {
   mapCafeList,
   setCafeData,
   setCurrentPositionAddress,
-  ViewSpecificRegionRange
+  ViewSpecificRegionRange,
+  ViewAllRegion
 } = mapSlice.actions;
 
 export default mapSlice.reducer;
