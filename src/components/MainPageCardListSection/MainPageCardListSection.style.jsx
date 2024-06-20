@@ -1,16 +1,27 @@
 import styled from 'styled-components';
 
+export const LoadingDiv = styled.div`
+  width: 200px;
+  margin: 200px auto 0 auto;
+`;
+
+export const ErrorDiv = styled.div`
+  width: 200px;
+  margin: 200px auto 0 auto;
+`;
+
 export const MainPageCardContainer = styled.section`
   display: flex;
   flex-direction: column;
   width: 65%;
   margin: 30px auto 50px auto;
   gap: 35px;
+  z-index: 1;
 `;
 
 export const MainPageCardItem = styled.div`
   width: 100%;
-  height: 195px;
+  height: auto;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 23.5px;
   border-radius: 25px;
   cursor: pointer;
@@ -24,6 +35,15 @@ export const MainPageCardItem = styled.div`
 
 export const CardTopSection = styled.div`
   display: flex;
+  @media (min-width: 895px) {
+    flex-direction: row;
+    gap: 15px;
+  }
+  @media (max-width: 895px) {
+    flex-direction: column;
+    gap: 10px;
+  }
+
   margin: 35px 0px 10px 30px;
   gap: 15px;
   align-items: baseline;
@@ -51,7 +71,13 @@ export const Rating = styled.div`
 `;
 
 export const ReviewCreatedDate = styled.p`
-  margin: 0px 15px 0px auto;
+  @media (min-width: 895px) {
+    margin: 0px 15px 0px auto;
+  }
+  @media (max-width: 895px) {
+    margin: 0px 15px 0px 0px;
+  }
+
   font-weight: normal;
   font-size: 1rem;
   color: grey;
@@ -91,7 +117,7 @@ export const CardHashtagItem = styled.div`
 `;
 
 export const CardReviewText = styled.p`
-  margin: 20px 30px auto 32px;
+  margin: 20px 30px 20px 32px;
 
   text-align: justify;
 

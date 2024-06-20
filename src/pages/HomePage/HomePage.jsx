@@ -1,28 +1,27 @@
+import { useSelector } from 'react-redux';
 import MainPageCardArrangeDropdown from '../../components/MainPageCardArrangeDropdown';
 import MainPageCardListSection from '../../components/MainPageCardListSection';
 import MainPageCurrentHashtagTextSection from '../../components/MainPageCurrentHashtagTextSection';
+import { MainPageHashtagDropdownContainer } from '../../components/MainPageCurrentHashtagTextSection/MainPageCurrentHashtagTextSection.style';
 import MainPageHashtagSelectionSection from '../../components/MainPageHashtagSelectionSection';
 import MainPageSearchSection from '../../components/MainPageSearchSection';
+import { useEffect } from 'react';
 
 function HomePage() {
+  const aaa = useSelector((state) => {
+    return state.isLoggedIn.isLoggedIn;
+  });
+  useEffect(() => {
+    console.log(aaa);
+  });
   return (
     <>
       <MainPageSearchSection />
       <MainPageHashtagSelectionSection />
-      <div
-        style={{
-          display: 'flex',
-          width: '65%',
-          height: '50px',
-          margin: '50px auto 0px auto',
-          alignItems: 'flexStart',
-          position: 'relative',
-          zIndex: '2'
-        }}
-      >
+      <MainPageHashtagDropdownContainer>
         <MainPageCurrentHashtagTextSection />
         <MainPageCardArrangeDropdown />
-      </div>
+      </MainPageHashtagDropdownContainer>
       <MainPageCardListSection />
     </>
   );

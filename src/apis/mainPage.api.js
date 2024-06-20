@@ -8,6 +8,9 @@ export const fetchReviewsByLatest = async (onlyTrueHashtagObj) => {
       .eq('해시태그 없음', true)
       .order('created_at', { ascending: false });
     return response.data;
+  } else if (Object.keys(onlyTrueHashtagObj).length === 6) {
+    const response = await supabase.from('reviews').select().order('created_at', { ascending: false });
+    return response.data;
   } else {
     const generateApiText = () => {
       let filterApiText = '';
