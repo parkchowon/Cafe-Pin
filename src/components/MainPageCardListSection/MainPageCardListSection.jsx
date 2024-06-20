@@ -51,6 +51,8 @@ const MainPageCardListSection = () => {
         : () => fetchReviewsByOldest(onlyTrueHashtagObj)
   });
   const navigate = useNavigate();
+
+  console.log(fetchedReviews);
   if (isPending) {
     return <div>로딩 중...</div>;
   } else if (isError) {

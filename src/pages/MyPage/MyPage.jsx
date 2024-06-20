@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import supabase from '../../apis/supabase';
+import MyPageCardListSection from '../../components/MyPageCardListSection';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -10,15 +10,11 @@ import {
   Circle,
   EditProfileButton,
   SaveProfileButton,
-  ReviewsSection,
-  ReviewsHeader,
-  Reviews,
-  Review,
-  Input,
+  Title,
   Label,
+  Input,
   Value,
-  FileInput,
-  Title
+  FileInput
 } from './MyPage.style';
 
 // 파일 업로드 함수
@@ -62,23 +58,24 @@ function MyPage() {
   const fetchUserProfile = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data, error } = await supabase
+          .from('users')
+          .select('*')
+          .eq('id', user.id)
+          .single();
 
-      const { data, error } = await supabase
-        .from('users')
-        .select('*')
-        .eq('id', user.id)
-        .single();
+        if (error) {
+          console.error('데이터를 가져오는데에 실패했습니다:', error.message);
+          return;
+        }
 
-      if (error) {
-        console.error('데이터를 가져오는데에 실패했습니다:', error.message);
-        return;
-      }
-
-      if (data) {
-        setUserProfile(data);
-        setNickname(data.nickname);
-        setEmail(data.email);
-        setImage(data.profile_url);
+        if (data) {
+          setUserProfile(data);
+          setNickname(data.nickname);
+          setEmail(data.email);
+          setImage(data.profile_url);
+        }
       }
     } catch (error) {
       console.error('사용자 프로필 정보를 가져오는 중 오류가 발생했습니다:', error.message);
@@ -98,7 +95,6 @@ function MyPage() {
       if (image instanceof File) {
         profileUrl = await uploadFile(image);
       }
-      console.log(profileUrl);
 
       const { error: authError } = await supabase.auth.updateUser({
         email,
@@ -117,8 +113,6 @@ function MyPage() {
         })
         .eq('id', userProfile.id);
 
-        console.log(userProfile.id);
-        
       if (error) {
         console.error('Update error:', error.message);
         throw error;
@@ -191,14 +185,7 @@ function MyPage() {
           )}
         </ProfilePicture>
       </ProfileSection>
-      <ReviewsSection>
-        <ReviewsHeader>내가 작성한 리뷰</ReviewsHeader>
-        <Reviews>
-          {[...Array(12)].map((_, index) => (
-            <Review key={index} />
-          ))}
-        </Reviews>
-      </ReviewsSection>
+      {userProfile && <MyPageCardListSection userId={userProfile.id} />}
     </MyPageContainer>
   );
 }

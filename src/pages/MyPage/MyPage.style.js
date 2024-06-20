@@ -11,7 +11,7 @@ export const ProfileSection = styled.div`
   display: flex;
   justify-content: center;
   padding: 20px;
-  border-right: 1px solid #808080; 
+  border-right: 3px solid rgba(128,128,128, 0.3); 
   box-sizing: border-box;
 `;
 
@@ -60,9 +60,10 @@ export const Circle = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 48px;
+  font-size: 40px;
   font-weight: bold;
   color: #4D2C0E;
+  margin-top: 20px;
   margin-bottom: 30px;
 `;
 
