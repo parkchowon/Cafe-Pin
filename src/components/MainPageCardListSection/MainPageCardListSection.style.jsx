@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const LoadingDiv = styled.div`
+  width: 200px;
+  margin: 200px auto 0 auto;
+`;
+
+export const ErrorDiv = styled.div`
+  width: 200px;
+  margin: 200px auto 0 auto;
+`;
+
 export const MainPageCardContainer = styled.section`
   display: flex;
   flex-direction: column;
