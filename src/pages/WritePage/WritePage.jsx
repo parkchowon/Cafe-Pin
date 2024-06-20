@@ -1,25 +1,26 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import category from '../../../src/apis/category.json';
+import supabase from '../../apis/supabase';
 import CoffeeBean from '../../components/common/Icon/CoffeeBean';
 import CoffeeBeanLight from '../../components/common/Icon/CoffeeBeanLight/CoffeeBeanLight';
-import category from '../../../src/apis/category.json';
-import { useSelector } from 'react-redux';
-import supabase from '../../apis/supabase';
+import StaticMap from '../../components/common/StaticMap';
 import {
-  Container,
-  SectionTitle,
   BoardSection,
-  ReviewSection,
-  LocationSection,
-  CafeName,
-  CafeAddress,
-  RatingSection,
-  HashtagContainer,
-  HashtagButton,
-  Section,
-  Textarea,
   ButtonContainer,
-  CreateBtn
+  CafeAddress,
+  CafeName,
+  Container,
+  CreateBtn,
+  HashtagButton,
+  HashtagContainer,
+  LocationSection,
+  RatingSection,
+  ReviewSection,
+  Section,
+  SectionTitle,
+  Textarea
 } from './WritePage.style';
 
 function WritePage() {
@@ -127,6 +128,7 @@ function WritePage() {
           <LocationSection>
             <CafeName>{selectedCafeData.place_name}</CafeName>
             <CafeAddress>{selectedCafeData.address_name}</CafeAddress>
+            <StaticMap x={selectedCafeData.x} y={selectedCafeData.y} width={'300px'} height={'300px'} />
           </LocationSection>
           <div style={{ width: '50%', float: 'right', marginLeft: '4rem' }}>
             <RatingSection>
