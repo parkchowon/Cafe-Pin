@@ -6,7 +6,7 @@ const MainPageAddReviewButton = () => {
   return (
     <AddReviewButton
       onClick={() => {
-        navigate('/write');
+        navigate('/select-cafe');
       }}
     >{`+ 리뷰 작성`}</AddReviewButton>
   );
