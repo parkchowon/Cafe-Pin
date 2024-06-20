@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import supabase from '../../apis/supabase';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   MyPageContainer,
@@ -20,8 +21,34 @@ import {
   Title
 } from './MyPage.style';
 
-function MyPage() {
+// 파일 업로드 함수
+const uploadFile = async (file) => {
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${uuidv4()}.${fileExt}`;
+  const filePath = `public/${fileName}`;
 
+  const { data: avatarData, error: uploadError } = await supabase.storage
+    .from('avatars')
+    .upload(filePath, file);
+
+  if (uploadError) {
+    console.error('Error uploading file:', uploadError.message);
+    return null;
+  }
+
+  const { data: publicUrlData, error: urlError } = supabase.storage
+    .from('avatars')
+    .getPublicUrl(avatarData.path);
+
+  if (urlError) {
+    console.error('Error getting public URL:', urlError.message);
+    return null;
+  }
+
+  return publicUrlData.publicUrl;
+};
+
+function MyPage() {
   const [userProfile, setUserProfile] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [nickname, setNickname] = useState('');
@@ -29,20 +56,18 @@ function MyPage() {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
-      fetchUserProfile();
+    fetchUserProfile();
   }, []);
 
   const fetchUserProfile = async () => {
     try {
-      const { data: { user } } = await supabase.auth.getUser()
-      console.log(user);
-      console.log(user.id);
+      const { data: { user } } = await supabase.auth.getUser();
+
       const { data, error } = await supabase
         .from('users')
         .select('*')
         .eq('id', user.id)
         .single();
-        console.log(data);
 
       if (error) {
         console.error('데이터를 가져오는데에 실패했습니다:', error.message);
@@ -68,21 +93,38 @@ function MyPage() {
     setIsEditing(false);
 
     try {
+      let profileUrl = image;
+
+      if (image instanceof File) {
+        profileUrl = await uploadFile(image);
+      }
+      console.log(profileUrl);
+
+      const { error: authError } = await supabase.auth.updateUser({
+        email,
+      });
+
+      if (authError) {
+        console.error('Auth error:', authError.message);
+        throw authError;
+      }
+
       const { data, error } = await supabase
         .from('users')
         .update({
-          profile_url: image,
+          profile_url: profileUrl,
           nickname,
-          email,
         })
-        .eq('id', userId);
-
+        .eq('id', userProfile.id);
+        console.log(userProfile.id);
       if (error) {
+        console.error('Update error:', error.message);
         throw error;
       }
 
       if (data) {
         console.log('프로필이 성공적으로 업데이트되었습니다:', data);
+        setUserProfile({ ...userProfile, profile_url: profileUrl, nickname, email });
       }
     } catch (error) {
       console.error('프로필 업데이트 중 오류가 발생했습니다:', error.message);
@@ -109,7 +151,7 @@ function MyPage() {
         <ProfilePicture>
           <Title>마이 페이지</Title>
           <Circle>
-            {image && <img src={URL.createObjectURL(image)} alt="프로필 사진" />}
+            {image && <img src={typeof image === 'string' ? image : URL.createObjectURL(image)} alt="프로필 사진" />}
           </Circle>
           {isEditing ? (
             <>
