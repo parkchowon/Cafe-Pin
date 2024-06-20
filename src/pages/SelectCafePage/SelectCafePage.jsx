@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Location from '../../components/common/Icon/Location';
 import KaKaoMap from '../../components/common/KaKaoMap/KaKaoMap';
 import { changeCenter, searchThisText } from '../../redux/slices/mapSlice';
-import { MyLocationBtn, SearchDiv, SearchInput, SettingBtn, SubmitBtn, Wrapper } from './MapSearchPage.style';
+import { SearchDiv, TitleDiv, Wrapper } from './SelectCafePage.style';
 
-function MapSearchPage() {
+function SelectCafePage() {
   const navigate = useNavigate();
 
   const [searchText, setSearchText] = useState('');
@@ -14,7 +13,7 @@ function MapSearchPage() {
   const dispatch = useDispatch();
   const location = useSelector((state) => state.map.position);
   const level = useSelector((state) => state.map.level);
-  const cafeList = useSelector((state) => state.map.cafeList);
+  const cafeData = useSelector((state) => state.map.selectedCafeData);
 
   //내 위치를 불러와주는 함수
   const handleLocationClick = () => {
@@ -45,20 +44,23 @@ function MapSearchPage() {
     dispatch(searchThisText(searchText));
   };
 
-  //주변 카페 리스트 저장
-  const handleSetLocationClick = () => {
-    navigate('/');
-    console.log(cafeList);
+  //마커로 표시된 위치의 카페 정보 저장
+  const handleSelectCafe = () => {
+    if (cafeData.category_group_code !== 'CE7') return alert('선택하신 장소가 카페가 아닙니다. 다시 시도해주세요');
+    console.log(cafeData);
+    navigate('/write');
   };
 
   return (
     <Wrapper>
+      <TitleDiv>
+        <p>리뷰하실 카페를 찾아주세요!</p>
+      </TitleDiv>
       <SearchDiv>
-        <MyLocationBtn onClick={handleLocationClick}>
-          <Location />내 위치 중심
-        </MyLocationBtn>
+        <button onClick={handleLocationClick}>내 위치 찾기</button>
         <form onSubmit={handleSearchSubmit}>
-          <SearchInput onChange={handleSearchInput} value={searchText} /> <SubmitBtn>검색</SubmitBtn>
+          <input onChange={handleSearchInput} />
+          <button>검색</button>
         </form>
       </SearchDiv>
       <KaKaoMap
@@ -67,12 +69,12 @@ function MapSearchPage() {
         width={1200}
         height={600}
         draggable={true}
-        radius={true}
-        clickable={false}
+        radius={false}
+        clickable={true}
       />
-      <SettingBtn onClick={handleSetLocationClick}>이 지역으로 설정</SettingBtn>
+      <button onClick={handleSelectCafe}>현재 표시된 장소를 선택</button>
     </Wrapper>
   );
 }
 
-export default MapSearchPage;
+export default SelectCafePage;
