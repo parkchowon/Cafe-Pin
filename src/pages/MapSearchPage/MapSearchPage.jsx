@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Location from '../../components/common/Icon/Location';
 import KaKaoMap from '../../components/common/KaKaoMap/KaKaoMap';
 import { changeCenter, searchThisText } from '../../redux/slices/mapSlice';
-import { MyLocationBtn, SearchDiv, SearchInput, SettingBtn, Wrapper } from './MapSearchPage.style';
+import { MyLocationBtn, SearchDiv, SearchInput, SettingBtn, SubmitBtn, Wrapper } from './MapSearchPage.style';
 
 function MapSearchPage() {
   const navigate = useNavigate();
@@ -53,9 +54,11 @@ function MapSearchPage() {
   return (
     <Wrapper>
       <SearchDiv>
-        <MyLocationBtn onClick={handleLocationClick}>내 위치 중심</MyLocationBtn>
+        <MyLocationBtn onClick={handleLocationClick}>
+          <Location />내 위치 중심
+        </MyLocationBtn>
         <form onSubmit={handleSearchSubmit}>
-          <SearchInput onChange={handleSearchInput} value={searchText} /> <button>검색</button>
+          <SearchInput onChange={handleSearchInput} value={searchText} /> <SubmitBtn>검색</SubmitBtn>
         </form>
       </SearchDiv>
       <KaKaoMap
@@ -67,7 +70,7 @@ function MapSearchPage() {
         radius={true}
         clickable={false}
       />
-      <SettingBtn onClick={handleSetLocationClick}>설정</SettingBtn>
+      <SettingBtn onClick={handleSetLocationClick}>이 지역으로 설정</SettingBtn>
     </Wrapper>
   );
 }

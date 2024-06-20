@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Circle, Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeCenter, mapCafeList, setCafeData } from '../../../redux/slices/mapSlice';
-import { MapContainer, MarkerDiv } from './KaKaoMap.style';
+import { Address, CloseBtn, MapContainer, MarkerDiv, Phone, RoadAdd, Title } from './KaKaoMap.style';
 
 function KaKaoMap(data) {
   useKakaoLoader();
@@ -82,14 +82,25 @@ function KaKaoMap(data) {
     });
   }, [text]);
 
+  /** MapSearchPage에서 사용하는 기능 */
+
   //원 반경안에 있는 모든 카페를 리스트로
   const makeCafeList = () => {
+    const list = [];
     const ps = new window.kakao.maps.services.Places();
     ps.categorySearch(
       'CE7',
-      (data, status) => {
+      (data, status, pagination) => {
         if (status === window.kakao.maps.services.Status.OK) {
-          return dispatch(mapCafeList(data));
+          if (pagination.hasNextPage) {
+            pagination.nextPage();
+          }
+          data.map((cafe) => {
+            list.push(cafe.id);
+          });
+          if (!pagination.hasNextPage) {
+            return dispatch(mapCafeList(list));
+          }
         }
       },
       {
@@ -104,13 +115,14 @@ function KaKaoMap(data) {
     const debouncing = setTimeout(() => {
       makeCafeList();
     }, 300);
-
+    getAddressData();
     return () => clearTimeout(debouncing);
   }, [position]);
 
+  /** SelectCafePage에서 다루는 기능   */
+
   //마커 클릭 이벤트
   const handleClickMarker = () => {
-    getAddressData();
     getCafeData();
     setIsOpen(true);
   };
@@ -150,11 +162,15 @@ function KaKaoMap(data) {
         }
       } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
         alert('결과가 존재하지 않습니다.');
-        return;
+        setIsOpen(false);
       } else if (status === window.kakao.maps.services.Status.ERROR) {
         alert('에러가 발생했습니다. 다시 시도해주세요');
       }
     });
+  };
+
+  const handleCloseMarker = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -199,14 +215,12 @@ function KaKaoMap(data) {
           {isOpen && (
             <MarkerDiv>
               <div>
-                <p>가게명 : {cafeData.place_name}</p>
-                <p>주소 : {address}</p>
-                <p>도로명 주소 : {cafeData.road_address_name}</p>
-                <p>{cafeData.phone}</p>
+                <Title>{cafeData.place_name}</Title>
+                <Address>(주소) {address}</Address>
+                <RoadAdd>(도로명) {cafeData.road_address_name}</RoadAdd>
+                <Phone>{cafeData.phone}</Phone>
               </div>
-              <div>
-                <img />
-              </div>
+              <CloseBtn onClick={handleCloseMarker}>X</CloseBtn>
             </MarkerDiv>
           )}
         </MapMarker>
