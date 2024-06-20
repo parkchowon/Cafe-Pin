@@ -12,13 +12,9 @@ const mapSlice = createSlice({
     cafeList: [],
     selectedCafeData: {},
     isMarkerOpen: false,
-    address: '',
     viewAll: true
   },
   reducers: {
-    setCurrentPositionAddress: (state, action) => {
-      state.address = action.payload;
-    },
     changeCenter: (state, action) => {
       state.level = action.payload.level;
       state.position = action.payload.position;
@@ -50,7 +46,6 @@ export const {
   searchThisText,
   mapCafeList,
   setCafeData,
-  setCurrentPositionAddress,
   ViewSpecificRegionRange,
   ViewAllRegion,
   setMarkerOpen

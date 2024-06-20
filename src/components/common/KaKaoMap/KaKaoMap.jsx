@@ -1,13 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Circle, Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  changeCenter,
-  mapCafeList,
-  setCafeData,
-  setCurrentPositionAddress,
-  setMarkerOpen
-} from '../../../redux/slices/mapSlice';
+import { changeCenter, mapCafeList, setCafeData, setMarkerOpen } from '../../../redux/slices/mapSlice';
 import { Address, CloseBtn, MapContainer, MarkerDiv, Phone, RoadAdd, Title } from './KaKaoMap.style';
 
 function KaKaoMap(data) {
@@ -141,13 +135,11 @@ function KaKaoMap(data) {
     const callback = function (result, status) {
       if (status === window.kakao.maps.services.Status.OK) {
         setAddress(result[0].address.address_name);
-        console.log(result[0].address.address_name);
-        dispatch(setCurrentPositionAddress(result[0].address.address_name));
       } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
-        alert('결과가 존재하지 않습니다.');
+        console.log('결과가 존재하지 않습니다.');
         return;
       } else if (status === window.kakao.maps.services.Status.ERROR) {
-        alert('에러가 발생했습니다. 다시 시도해주세요');
+        console.log('에러가 발생했습니다. 다시 시도해주세요');
       }
     };
 

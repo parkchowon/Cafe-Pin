@@ -14,15 +14,10 @@ function HomePage() {
   const user = useSelector((state) => state.user.userData);
 
   useEffect(() => {
-    console.log(user);
-  }, [user]);
-
-  useEffect(() => {
     (async () => {
       const userId = await getCurrentUser();
       if (userId) {
         const userData = await fetchUser(userId);
-        console.log(userData);
         dispatch(fetchUserData(userData));
       }
     })();
