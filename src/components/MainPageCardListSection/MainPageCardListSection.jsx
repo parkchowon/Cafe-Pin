@@ -22,8 +22,16 @@ import GreyCoffeeBean from '../common/Icon/GreyCoffeeBean';
 const MainPageCardListSection = () => {
   const HASHTAG_ARRAY = ['커피 맛집', '디저트 맛집', '분위기 좋은', '데이트 명소', '공부하기 좋은', '단체모임 가능'];
 
+  const viewAll = useSelector((state) => {
+    return state.map.viewAll;
+  });
+
   const reviewsArrangeOption = useSelector((state) => {
     return state.arrangeOption.arrangeOption;
+  });
+
+  const idsOfCafesInMap = useSelector((state) => {
+    return state.map.cafeList;
   });
 
   const hashtagObj = useSelector((state) => {
@@ -45,12 +53,12 @@ const MainPageCardListSection = () => {
   } = useQuery({
     queryKey:
       reviewsArrangeOption === 'latest'
-        ? ['fetchReviewsByLatest', onlyTrueHashtagObj]
-        : ['fetchReviewsByOldest', onlyTrueHashtagObj],
+        ? ['fetchReviewsByLatest', onlyTrueHashtagObj, idsOfCafesInMap, viewAll]
+        : ['fetchReviewsByOldest', onlyTrueHashtagObj, idsOfCafesInMap, viewAll],
     queryFn:
       reviewsArrangeOption === 'latest'
-        ? () => fetchReviewsByLatest(onlyTrueHashtagObj)
-        : () => fetchReviewsByOldest(onlyTrueHashtagObj)
+        ? () => fetchReviewsByLatest(onlyTrueHashtagObj, idsOfCafesInMap, viewAll)
+        : () => fetchReviewsByOldest(onlyTrueHashtagObj, idsOfCafesInMap, viewAll)
   });
   const navigate = useNavigate();
   if (isPending) {
