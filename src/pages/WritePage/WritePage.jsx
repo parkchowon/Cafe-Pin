@@ -64,6 +64,7 @@ function WritePage() {
 
     if (selectedCafeData) {
       // selectedCafeData가 정의되었는지 확인
+<<<<<<< HEAD
       if (selectedHashtags.length >= 1 && selectedHashtags.length <= 5) {
         const reviewData = {
           user_id: '9131f028-7f4b-432c-aed1-575b39917150',
@@ -118,6 +119,27 @@ function WritePage() {
 
         console.log(reviewData);
       }
+=======
+      const reviewData = {
+        user_id: '9131f028-7f4b-432c-aed1-575b39917150',
+        content,
+        rating,
+        cafe_name: selectedCafeData.place_name,
+        cafe_address: selectedCafeData.address_name,
+        map_x: selectedCafeData.x,
+        map_y: selectedCafeData.y,
+        cafe_id: selectedCafeData.id,
+        '커피 맛집': selectedHashtags.includes('커피 맛집'),
+        '디저트 맛집': selectedHashtags.includes('디저트 맛집')
+      };
+      try {
+        await supabase.from('reviews').insert(reviewData);
+      } catch (error) {
+        console.error(error);
+      }
+
+      console.log(reviewData);
+>>>>>>> ab2e5bfe4cf1b1d6b42572a20eb3dffcf26a6f09
     } else {
       console.log('selectedCafeData is undefined');
     }
