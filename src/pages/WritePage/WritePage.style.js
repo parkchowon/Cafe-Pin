@@ -114,7 +114,10 @@ export const Section = styled.div`
   flex-direction: column;
 `;
 
-export const Input = styled.input`
+export const Textarea = styled.textarea`
+resize: none;
+  text-align: left;
+  vertical-align: top;
   width: 100%;
   font-size: 16px;
   border: none; 
@@ -124,7 +127,6 @@ export const Input = styled.input`
   max-width: 500px;
   padding: 18px 16px;
   height: 150px;
-  text-align: left; 
   vertical-align: top; // 수직 정렬을 최상단으로 설정
 `;
 
