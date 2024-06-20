@@ -22,19 +22,40 @@ export const ProfilePicture = styled.div`
 `;
 
 export const Circle = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   background-color: #dcdcdc;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  label {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 `;
 
@@ -116,5 +137,5 @@ export const Value = styled.p`
 `;
 
 export const FileInput = styled.input`
-  margin-top: 10px;
+  display: none;
 `;

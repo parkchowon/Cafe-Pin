@@ -116,7 +116,9 @@ function MyPage() {
           nickname,
         })
         .eq('id', userProfile.id);
+
         console.log(userProfile.id);
+        
       if (error) {
         console.error('Update error:', error.message);
         throw error;
@@ -151,7 +153,16 @@ function MyPage() {
         <ProfilePicture>
           <Title>마이 페이지</Title>
           <Circle>
-            {image && <img src={typeof image === 'string' ? image : URL.createObjectURL(image)} alt="프로필 사진" />}
+            <img 
+              src={image ? (typeof image === 'string' ? image : URL.createObjectURL(image)) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s'} 
+              alt="프로필 사진" 
+            />
+            {isEditing && (
+              <label>
+                파일 선택
+                <FileInput type="file" onChange={handleImageChange} />
+              </label>
+            )}
           </Circle>
           {isEditing ? (
             <>
@@ -163,7 +174,6 @@ function MyPage() {
                 이메일
                 <Input type="email" value={email} onChange={handleEmailChange} />
               </Label>
-              <FileInput type="file" onChange={handleImageChange} />
               <SaveProfileButton onClick={handleSaveClick}>저장하기</SaveProfileButton>
             </>
           ) : (
