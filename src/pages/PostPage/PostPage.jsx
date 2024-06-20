@@ -74,8 +74,8 @@ function PostPage() {
             <KaKaoMap
               x={fetchedReviewItem.post.map_x}
               y={fetchedReviewItem.post.map_y}
-              width={700}
-              height={400}
+              width={'700px'}
+              height={'400px'}
               draggable={false}
               radius={false}
               clickable={false}
