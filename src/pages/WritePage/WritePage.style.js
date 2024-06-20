@@ -47,9 +47,23 @@ export const ReviewSection = styled.div`
 export const LocationSection = styled.div`
 width: 50%;
 float: left;
-  padding: 1.5rem;
   border-radius: 8px;
   text-align: center;
+`;
+
+export const CafeName = styled.h2`
+font-size: 2rem;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 1rem; // 아래쪽 마진 추가
+  text-align: left; // 왼쪽 정렬
+`;
+
+export const CafeAddress = styled.p`
+width: 100%;
+float: left;
+  border-radius: 8px;
+  text-align: left;
 `;
 
 export const RatingSection = styled.div`
@@ -95,36 +109,6 @@ export const HashtagButton = styled.button`
   }
 `;
 
-
-
-
-export const Hashtag = styled.button`
-  background-color: ${(props) => props.isSelected ? '#DBC5B1' : '#FFFFFF'};
-  color: ${(props) => props.isSelected ? '#FFFFFF' : '#DBC5B1'};
-  padding: 2px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  border: 2px solid #DBC5B1;
-
-  &:hover {
-    background-color: #DBC5B1;
-    color: #FFFFFF;
-  }
-
-  &.selected {
-    background-color: #DBC5B1;
-    color: #FFFFFF;
-
-    &:hover {
-      background-color: #DBC5B1;
-      color: #FFFFFF;
-    }
-  }
-`;
-
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
@@ -141,6 +125,7 @@ export const Input = styled.input`
   padding: 18px 16px;
   height: 150px;
   text-align: left; 
+  vertical-align: top; // 수직 정렬을 최상단으로 설정
 `;
 
 export const ButtonContainer = styled.div`
