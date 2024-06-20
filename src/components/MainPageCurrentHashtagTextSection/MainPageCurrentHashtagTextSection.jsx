@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   AddressText,
   CurrentHashtagTextContainer,
+  ExitIconContainer,
   PlainText,
   PlainTextExitIconContainer
 } from './MainPageCurrentHashtagTextSection.style';
@@ -29,7 +30,9 @@ const MainPageRegionFilterTextSection = () => {
         <AddressText>{viewAll ? '전체보기' : `${currentPositionAddress}`}</AddressText>
         <PlainTextExitIconContainer>
           <PlainText>{viewAll ? '' : `에서 검색 중`}</PlainText>
-          {viewAll ? <></> : <ExitIcon size="20" onClick={handleClickExitRegionFilterIcon} />}
+          <ExitIconContainer onClick={handleClickExitRegionFilterIcon}>
+            {viewAll ? <></> : <ExitIcon size="20" />}
+          </ExitIconContainer>
         </PlainTextExitIconContainer>
       </CurrentHashtagTextContainer>
     </>

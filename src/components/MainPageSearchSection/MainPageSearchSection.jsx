@@ -24,13 +24,12 @@ const MainPageSearchSection = () => {
   };
   return (
     <MainPageSearchSectionContainer>
-      <MapIconContainer>
-        <MapIcon
-          size="64"
-          onClick={() => {
-            navigate('/search');
-          }}
-        />
+      <MapIconContainer
+        onClick={() => {
+          navigate('/search');
+        }}
+      >
+        <MapIcon size="64" />
       </MapIconContainer>
 
       <CafeSearchInputSection>
