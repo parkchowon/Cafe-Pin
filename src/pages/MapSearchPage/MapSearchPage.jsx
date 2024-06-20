@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Location from '../../components/common/Icon/Location';
 import KaKaoMap from '../../components/common/KaKaoMap/KaKaoMap';
 import { changeCenter, searchThisText } from '../../redux/slices/mapSlice';
-import { MyLocationBtn, SearchDiv, SearchInput, SettingBtn, SubmitBtn, Wrapper } from './MapSearchPage.style';
+import { MyLocationBtn, SearchDiv, SearchInput, SettingBtn, SubmitBtn, TitleDiv, Wrapper } from './MapSearchPage.style';
 
 function MapSearchPage() {
   const navigate = useNavigate();
@@ -53,19 +53,23 @@ function MapSearchPage() {
 
   return (
     <Wrapper>
+      <TitleDiv>
+        <p>리뷰를 보고싶은 지역을 찾아보세요!</p>
+      </TitleDiv>
       <SearchDiv>
         <MyLocationBtn onClick={handleLocationClick}>
           <Location />내 위치 중심
         </MyLocationBtn>
         <form onSubmit={handleSearchSubmit}>
-          <SearchInput onChange={handleSearchInput} value={searchText} /> <SubmitBtn>검색</SubmitBtn>
+          <SearchInput onChange={handleSearchInput} value={searchText} />
+          <SubmitBtn>검색</SubmitBtn>
         </form>
       </SearchDiv>
       <KaKaoMap
         x={location.lat}
         y={location.lng}
-        width={1200}
-        height={600}
+        width={`135dvh`}
+        height={`60dvh`}
         draggable={true}
         radius={true}
         clickable={false}

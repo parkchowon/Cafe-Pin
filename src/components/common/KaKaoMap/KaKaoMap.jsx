@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Circle, Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCenter, mapCafeList, setCafeData } from '../../../redux/slices/mapSlice';
+import { changeCenter, mapCafeList, setCafeData, setMarkerOpen } from '../../../redux/slices/mapSlice';
 import { Address, CloseBtn, MapContainer, MarkerDiv, Phone, RoadAdd, Title } from './KaKaoMap.style';
 
 function KaKaoMap(data) {
@@ -13,9 +13,9 @@ function KaKaoMap(data) {
   const position = useSelector((state) => state.map.position);
   const level = useSelector((state) => state.map.level);
   const cafeData = useSelector((state) => state.map.selectedCafeData);
+  const isOpen = useSelector((state) => state.map.isMarkerOpen);
 
   const [address, setAddress] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
   const [length, setLength] = useState(500);
 
   //원 범위
@@ -48,7 +48,6 @@ function KaKaoMap(data) {
   //맵을 클릭하여 위치 이동
   const handleCenterClick = (map) => {
     const latlng = map.getCenter();
-    setIsOpen(false);
     const changeData = {
       level: map.getLevel(),
       position: {
@@ -112,6 +111,7 @@ function KaKaoMap(data) {
 
   //위치가 바뀔때마다 리스트 업데이트
   useEffect(() => {
+    dispatch(setMarkerOpen(false));
     const debouncing = setTimeout(() => {
       makeCafeList();
     }, 300);
@@ -124,7 +124,7 @@ function KaKaoMap(data) {
   //마커 클릭 이벤트
   const handleClickMarker = () => {
     getCafeData();
-    setIsOpen(true);
+    dispatch(setMarkerOpen(!isOpen));
   };
 
   //좌표로 주소 나타내기
@@ -161,8 +161,8 @@ function KaKaoMap(data) {
           dispatch(setCafeData(data[0]));
         }
       } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
-        alert('결과가 존재하지 않습니다.');
-        setIsOpen(false);
+        alert('장소가 불분명합니다');
+        dispatch(setMarkerOpen(false));
       } else if (status === window.kakao.maps.services.Status.ERROR) {
         alert('에러가 발생했습니다. 다시 시도해주세요');
       }
@@ -170,7 +170,7 @@ function KaKaoMap(data) {
   };
 
   const handleCloseMarker = () => {
-    setIsOpen(false);
+    dispatch(setMarkerOpen(false));
   };
 
   return (
@@ -182,8 +182,8 @@ function KaKaoMap(data) {
           lng: `${position.lng}`
         }}
         style={{
-          width: `${data.width}px`,
-          height: `${data.height}px`
+          width: `${data.width}`,
+          height: `${data.height}`
         }}
         ref={mapRef}
         level={3}
