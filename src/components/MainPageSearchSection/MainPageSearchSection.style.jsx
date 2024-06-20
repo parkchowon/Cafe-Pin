@@ -46,23 +46,25 @@ export const CafeSearchInputSection = styled.section`
   }
 `;
 
-export const MapIcon = styled.div`
-  background-image: url('src/components/common/Icon/MapIcon.png');
-  background-size: contain;
-  background-repeat: no-repeat;
+export const MapIconContainer = styled.div`
   width: 64px;
   height: 64px;
   margin: auto 0px 0px 52px;
+  cursor: pointer;
   transition: 0.3s;
   &:hover {
-    background-image: url('src/components/common/Icon/MapIcon_hover.png');
-    cursor: pointer;
+    transform: scale(1.15);
     transition: 0.3s;
   }
 `;
 
-export const SearchIcon = styled.img`
+export const SearchIconContainer = styled.div`
+  margin: auto 20px auto auto;
+
+  transition: 0.3s;
   &:hover {
     cursor: pointer;
+    transform: scale(1.15);
+    transition: 0.3s;
   }
 `;
