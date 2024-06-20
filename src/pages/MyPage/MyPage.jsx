@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate 가져오기
-
+import { useParams } from 'react-router-dom';
 import supabase from '../../apis/supabase';
 
 import {
@@ -22,43 +21,42 @@ import {
 } from './MyPage.style';
 
 function MyPage() {
+
+  const [userProfile, setUserProfile] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [image, setImage] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const navigate = useNavigate(); // useNavigate 사용
 
   useEffect(() => {
-    checkLoginStatus();
+      fetchUserProfile();
   }, []);
 
-  const checkLoginStatus = async () => {
-    const user = supabase.auth.users();
-    if (user) {
-      setLoggedIn(true);
-      fetchProfile(user.user.id); // user.user.id를 사용하여 fetchProfile 호출
-    } else {
-      setLoggedIn(false);
-      navigate('/LoginPage'); // useNavigate로 리디렉션 처리
-    }
-  };
+  const fetchUserProfile = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      console.log(user);
+      console.log(user.id);
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+        console.log(data);
 
-  const fetchProfile = async (userId) => {
-    const { data, error } = await supabase
-      .from('users')
-      .select('nickname, email, profile_url')
-      .eq('uuid', userId)
-      .single();
+      if (error) {
+        console.error('데이터를 가져오는데에 실패했습니다:', error.message);
+        return;
+      }
 
-    if (data) {
-      setNickname(data.nickname);
-      setEmail(data.email);
-      setImage(data.profile_url);
-    }
-
-    if (error) {
-      console.error('Error fetching profile:', error.message);
+      if (data) {
+        setUserProfile(data);
+        setNickname(data.nickname);
+        setEmail(data.email);
+        setImage(data.profile_url);
+      }
+    } catch (error) {
+      console.error('사용자 프로필 정보를 가져오는 중 오류가 발생했습니다:', error.message);
     }
   };
 
@@ -67,18 +65,27 @@ function MyPage() {
   };
 
   const handleSaveClick = async () => {
-    const user = supabase.auth.session();
-    if (user) {
-      const { error } = await supabase
+    setIsEditing(false);
+
+    try {
+      const { data, error } = await supabase
         .from('users')
-        .update({ nickname, email, profile_url: image })
-        .eq('uuid', user.user.id);
+        .update({
+          profile_url: image,
+          nickname,
+          email,
+        })
+        .eq('id', userId);
 
       if (error) {
-        console.error('Error updating profile:', error.message);
-      } else {
-        setIsEditing(false);
+        throw error;
       }
+
+      if (data) {
+        console.log('프로필이 성공적으로 업데이트되었습니다:', data);
+      }
+    } catch (error) {
+      console.error('프로필 업데이트 중 오류가 발생했습니다:', error.message);
     }
   };
 
@@ -92,21 +99,7 @@ function MyPage() {
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      uploadImage(file);
-    }
-  };
-
-  const uploadImage = async (file) => {
-    const { data, error } = await supabase.storage
-      .from('users')
-      .upload(`public/${file.name}`, file);
-
-    if (error) {
-      console.error('Error uploading image:', error.message);
-    } else {
-      const imageUrl = await supabase.storage.from('avatars').getPublicUrl(data.path).publicURL;
-      setImage(imageUrl);
+      setImage(e.target.files[0]);
     }
   };
 
@@ -116,37 +109,33 @@ function MyPage() {
         <ProfilePicture>
           <Title>마이 페이지</Title>
           <Circle>
-            {image ? <img src={image} alt="프로필" /> : null}
+            {image && <img src={URL.createObjectURL(image)} alt="프로필 사진" />}
           </Circle>
-          {loggedIn ? (
-            isEditing ? (
-              <>
-                <Label>
-                  닉네임
-                  <Input type="text" value={nickname} onChange={handleNicknameChange} />
-                </Label>
-                <Label>
-                  이메일
-                  <Input type="email" value={email} onChange={handleEmailChange} />
-                </Label>
-                <FileInput type="file" onChange={handleImageChange} />
-                <SaveProfileButton onClick={handleSaveClick}>저장하기</SaveProfileButton>
-              </>
-            ) : (
-              <>
-                <Label>
-                  닉네임
-                  <Value>{nickname}</Value>
-                </Label>
-                <Label>
-                  이메일
-                  <Value>{email}</Value>
-                </Label>
-                <EditProfileButton onClick={handleEditClick}>프로필 수정</EditProfileButton>
-              </>
-            )
+          {isEditing ? (
+            <>
+              <Label>
+                닉네임
+                <Input type="text" value={nickname} onChange={handleNicknameChange} />
+              </Label>
+              <Label>
+                이메일
+                <Input type="email" value={email} onChange={handleEmailChange} />
+              </Label>
+              <FileInput type="file" onChange={handleImageChange} />
+              <SaveProfileButton onClick={handleSaveClick}>저장하기</SaveProfileButton>
+            </>
           ) : (
-            <p>로그인이 필요합니다.</p>
+            <>
+              <Label>
+                닉네임
+                <Value>{nickname}</Value>
+              </Label>
+              <Label>
+                이메일
+                <Value>{email}</Value>
+              </Label>
+              <EditProfileButton onClick={handleEditClick}>프로필 수정</EditProfileButton>
+            </>
           )}
         </ProfilePicture>
       </ProfileSection>
