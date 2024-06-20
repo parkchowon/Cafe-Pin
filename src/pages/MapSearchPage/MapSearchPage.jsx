@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import KaKaoMap from '../../components/common/KaKaoMap/KaKaoMap';
 import { changeCenter, searchThisText } from '../../redux/slices/mapSlice';
 import { MyLocationBtn, SearchDiv, SearchInput, SettingBtn, Wrapper } from './MapSearchPage.style';
 
 function MapSearchPage() {
+  const navigate = useNavigate();
+
   const [searchText, setSearchText] = useState('');
 
   const dispatch = useDispatch();
@@ -43,6 +46,7 @@ function MapSearchPage() {
 
   //주변 카페 리스트 저장
   const handleSetLocationClick = () => {
+    navigate('/');
     console.log(cafeList);
   };
 
@@ -54,7 +58,15 @@ function MapSearchPage() {
           <SearchInput onChange={handleSearchInput} value={searchText} /> <button>검색</button>
         </form>
       </SearchDiv>
-      <KaKaoMap x={location.lat} y={location.lng} width={1200} height={600} draggable={true} radius={true} />
+      <KaKaoMap
+        x={location.lat}
+        y={location.lng}
+        width={1200}
+        height={600}
+        draggable={true}
+        radius={true}
+        clickable={false}
+      />
       <SettingBtn onClick={handleSetLocationClick}>설정</SettingBtn>
     </Wrapper>
   );

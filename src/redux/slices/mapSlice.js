@@ -9,7 +9,8 @@ const mapSlice = createSlice({
       lng: 126.570667
     },
     searchText: '',
-    cafeList: []
+    cafeList: [],
+    selectedCafeData: {}
   },
   reducers: {
     changeCenter: (state, action) => {
@@ -21,10 +22,13 @@ const mapSlice = createSlice({
     },
     mapCafeList: (state, action) => {
       state.cafeList = action.payload;
+    },
+    setCafeData: (state, action) => {
+      state.selectedCafeData = action.payload;
     }
   }
 });
 
-export const { changeCenter, searchThisText, mapCafeList } = mapSlice.actions;
+export const { changeCenter, searchThisText, mapCafeList, setCafeData } = mapSlice.actions;
 
 export default mapSlice.reducer;
