@@ -112,9 +112,7 @@ const MainPageCardListSection = () => {
               >
                 <CardTopSection>
                   <CardTargetCafe>{review.cafe_name}</CardTargetCafe>
-                  <CardTargetCafeAddress>
-                    {review.cafe_address['시']} {review.cafe_address['구']} {review.cafe_address['동']}
-                  </CardTargetCafeAddress>
+                  <CardTargetCafeAddress>{review.cafe_address}</CardTargetCafeAddress>
                   <ReviewCreatedDate>{formattedDate}</ReviewCreatedDate>
                   <Rating>
                     {Array.from({ length: 5 - review.rating }).map((unusedVar, i) => {

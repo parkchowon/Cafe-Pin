@@ -22,8 +22,10 @@ export const AddReviewButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.3s;
 
   &:hover {
+    transform: scale(1.05);
     cursor: pointer;
     transition: 0.3s;
 

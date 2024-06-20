@@ -21,7 +21,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
-
     const email = e.target[0].value.trim();
     const password = e.target[1].value.trim();
 
