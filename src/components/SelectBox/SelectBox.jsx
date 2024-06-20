@@ -1,27 +1,25 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { SWITCH_TO_LOGGED_OUT } from '../../redux/slices/isLoggedInSlice';
+import { logoutUser } from '../../apis/user.api';
 import { Item, Wrapper } from './SelectBox.style';
 
 function SelectBox() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn.isLoggedIn);
+  const user = useSelector((state) => state.user.userData);
 
   const handleClick = (e) => {
     const path = e.target.id;
     if (path == '') {
-      dispatch(SWITCH_TO_LOGGED_OUT());
-      localStorage.removeItem('accessToken');
-      navigate(path);
+      logoutUser();
+      window.location.reload();
     }
     navigate(path);
   };
 
   return (
     <Wrapper>
-      {isLoggedIn ? (
+      {user.id ? (
         <>
           <Item className="first" id="my-page" onClick={handleClick}>
             마이페이지

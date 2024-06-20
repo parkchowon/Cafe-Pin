@@ -1,11 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../../apis/supabase';
 import GithubLogo from '../../components/common/Icon/GithubLogo';
 import GoogleLogo from '../../components/common/Icon/GoogleLogo';
 import KakaotalkLogo from '../../components/common/Icon/KakaotalkLogo';
-import { SWITCH_TO_LOGGED_IN } from '../../redux/slices/isLoggedInSlice';
 import {
   Button,
   Container,
@@ -21,7 +19,6 @@ import {
 } from './LoginPage.style';
 
 const LoginPage = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -48,8 +45,6 @@ const LoginPage = () => {
       return;
     }
 
-    localStorage.setItem('accessToken', data.session.access_token);
-    dispatch(SWITCH_TO_LOGGED_IN());
     alert('로그인 성공');
     navigate('/');
   };
