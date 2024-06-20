@@ -1,33 +1,43 @@
-import { useSelector } from 'react-redux';
-import { CurrentHashtagTextContainer, CurrentHashtagTextItem } from './MainPageCurrentHashtagTextSection.style';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  AddressText,
+  CurrentHashtagTextContainer,
+  ExitIcon,
+  PlainText,
+  PlainTextExitIconContainer
+} from './MainPageCurrentHashtagTextSection.style';
+import { ViewAllRegion } from '../../redux/slices/mapSlice';
 
-const MainPageCurrentHashtagTextSection = () => {
-  const selectedHashtagsArray = [];
-  const hashtagState = useSelector((state) => {
-    return state.hashtag.hashtagStates;
+const MainPageRegionFilterTextSection = () => {
+  const dispatch = useDispatch();
+
+  const viewAll = useSelector((state) => {
+    return state.map.viewAll;
   });
 
-  for (const [key, value] of Object.entries(hashtagState)) {
-    if (value === true) {
-      selectedHashtagsArray.push(key);
-    }
-  }
+  const currentPositionAddress = useSelector((state) => {
+    return state.map.address;
+  });
+
+  const handleClickExitRegionFilterIcon = () => {
+    dispatch(ViewAllRegion());
+  };
 
   return (
     <>
       <CurrentHashtagTextContainer>
-        {selectedHashtagsArray.length === 6 ? (
-          <CurrentHashtagTextItem>#전체보기</CurrentHashtagTextItem>
-        ) : selectedHashtagsArray.length === 0 ? (
-          <CurrentHashtagTextItem>#해시태그 없음</CurrentHashtagTextItem>
-        ) : (
-          selectedHashtagsArray.map((hashtag) => {
-            return <CurrentHashtagTextItem key={hashtag}>#{hashtag}</CurrentHashtagTextItem>;
-          })
-        )}
+        <AddressText>{viewAll ? '전체보기' : `${currentPositionAddress}`}</AddressText>
+        <PlainTextExitIconContainer>
+          <PlainText>{viewAll ? '' : `에서 검색 중`}</PlainText>
+          {viewAll ? (
+            <></>
+          ) : (
+            <ExitIcon src="src\components\common\Icon\ExitIcon.png" onClick={handleClickExitRegionFilterIcon} />
+          )}
+        </PlainTextExitIconContainer>
       </CurrentHashtagTextContainer>
     </>
   );
 };
 
-export default MainPageCurrentHashtagTextSection;
+export default MainPageRegionFilterTextSection;

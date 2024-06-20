@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Location from '../../components/common/Icon/Location';
 import KaKaoMap from '../../components/common/KaKaoMap/KaKaoMap';
-import { changeCenter, searchThisText } from '../../redux/slices/mapSlice';
+import { ViewSpecificRegionRange, changeCenter, searchThisText } from '../../redux/slices/mapSlice';
 import { MyLocationBtn, SearchDiv, SearchInput, SettingBtn, SubmitBtn, Wrapper } from './MapSearchPage.style';
 
 function MapSearchPage() {
@@ -47,6 +47,7 @@ function MapSearchPage() {
 
   //주변 카페 리스트 저장
   const handleSetLocationClick = () => {
+    dispatch(ViewSpecificRegionRange());
     navigate('/');
     console.log(cafeList);
   };

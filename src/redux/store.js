@@ -4,6 +4,7 @@ import isLoggedInSlice from './slices/isLoggedInSlice';
 import hashtagSlice from './slices/hashtagSlice';
 import mapSlice from './slices/mapSlice';
 import postSlice from './slices/postSlice';
+import cafeSearchTextSlice from './slices/cafeSearchTextSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     hashtag: hashtagSlice,
     arrangeOption: arrangeOptionSlice,
     isLoggedIn: isLoggedInSlice,
-    map: mapSlice
+    map: mapSlice,
+    cafeSearchText: cafeSearchTextSlice
   }
 });
 
