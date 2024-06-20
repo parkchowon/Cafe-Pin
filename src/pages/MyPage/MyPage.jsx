@@ -95,6 +95,7 @@ function MyPage() {
       if (image instanceof File) {
         profileUrl = await uploadFile(image);
       }
+      console.log(profileUrl);
 
       const { error: authError } = await supabase.auth.updateUser({
         email,
@@ -113,6 +114,7 @@ function MyPage() {
         })
         .eq('id', userProfile.id);
 
+        console.log(userProfile.id);
       if (error) {
         console.error('Update error:', error.message);
         throw error;
