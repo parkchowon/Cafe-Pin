@@ -7,6 +7,8 @@ import {
   CardTargetCafe,
   CardTargetCafeAddress,
   CardTopSection,
+  ErrorDiv,
+  LoadingDiv,
   MainPageCardContainer,
   MainPageCardItem,
   Rating,
@@ -52,9 +54,9 @@ const MainPageCardListSection = () => {
   });
   const navigate = useNavigate();
   if (isPending) {
-    return <div>로딩 중...</div>;
+    return <LoadingDiv>로딩 중...</LoadingDiv>;
   } else if (isError) {
-    return <div>오류 발생</div>;
+    return <ErrorDiv>오류 발생</ErrorDiv>;
   } else {
     return (
       <MainPageCardContainer>
