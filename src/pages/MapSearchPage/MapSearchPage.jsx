@@ -49,7 +49,6 @@ function MapSearchPage() {
   const handleSetLocationClick = () => {
     dispatch(ViewSpecificRegionRange());
     navigate('/');
-    console.log(cafeList);
   };
 
   return (

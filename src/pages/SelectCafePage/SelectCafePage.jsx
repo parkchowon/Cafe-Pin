@@ -63,7 +63,6 @@ function SelectCafePage() {
     } else if (cafeData.category_group_code !== 'CE7') {
       return alert('선택하신 장소가 카페가 아닙니다. 다시 시도해주세요');
     }
-    console.log(cafeData);
     navigate('/write');
   };
 
