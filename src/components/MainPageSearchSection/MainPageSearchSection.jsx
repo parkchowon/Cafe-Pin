@@ -17,7 +17,6 @@ const MainPageSearchSection = () => {
   const navigate = useNavigate();
   const handleEnterKeyOnInput = (event) => {
     if (event.key === 'Enter') {
-      console.log(inputValueRef.current.value);
       dispatch(SET_CAFE_SEARCH_TEXT(inputValueRef.current.value));
     }
   };
@@ -30,7 +29,12 @@ const MainPageSearchSection = () => {
       />
       <CafeSearchInputSection>
         <input placeholder="리뷰를 볼 카페를 검색!" onKeyDown={handleEnterKeyOnInput} ref={inputValueRef} />
-        <SearchIcon src="src/components/common/Icon/SearchIcon.png" />
+        <SearchIcon
+          src="src/components/common/Icon/SearchIcon.png"
+          onClick={() => {
+            dispatch(SET_CAFE_SEARCH_TEXT(inputValueRef.current.value));
+          }}
+        />
       </CafeSearchInputSection>
       <MainPageAddReviewButton></MainPageAddReviewButton>
     </MainPageSearchSectionContainer>
