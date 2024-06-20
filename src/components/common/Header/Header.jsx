@@ -5,7 +5,7 @@ function Header() {
   return (
     <Wrapper>
       <Logo>
-        <CoffeeBean />
+        <CoffeeBean size={50} />
         <p className="logo-text">Cafe Pin</p>
       </Logo>
       <User>
