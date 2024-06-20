@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import CoffeeBean from '../../components/common/Icon/CoffeeBean';
 import CoffeeBeanLight from '../../components/common/Icon/CoffeeBeanLight/CoffeeBeanLight';
 import category from '../../../src/apis/category.json';
 import { useSelector } from 'react-redux';
-// import supabase from '../../apis/supabase';
+import supabase from '../../apis/supabase';
 import { INITIAL_SWITCH_HASHTAG_ONOFF, SWITCH_HASHTAG_ONOFF } from '../../redux/slices/hashtagSlice';
 import {
   Container,
@@ -12,6 +11,8 @@ import {
   BoardSection,
   ReviewSection,
   LocationSection,
+  CafeName,
+  CafeAddress,
   RatingSection,
   HashtagContainer,
   HashtagButton,
@@ -22,7 +23,6 @@ import {
 } from './WritePage.style';
 
 function WritePage() {
-  const navigate = useNavigate();
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
   const [hashtagStates, setHashtagStates] = useState({});
@@ -54,22 +54,32 @@ function WritePage() {
     e.preventDefault();
 
     if (!content.trim()) {
-      alert('내용을 입력하세요.');
       return;
     }
 
     const selectedHashtags = Object.keys(hashtagStates).filter((hashtag) => hashtagStates[hashtag]);
+    console.log(selectedHashtags);
 
     const reviewData = {
+      user_id: '9131f028-7f4b-432c-aed1-575b39917150',
       content,
       rating,
-      hashtags: selectedHashtags
+      place_name: selectedCafeData.place_name,
+      cafe_address: selectedCafeData.address_name,
+      x: selectedCafeData.x,
+      y: selectedCafeData.y,
+      cafe_id: selectedCafeData.id,
+      '커피 맛집': selectedHashtags.includes('커피 맛집'),
+      '디저트 맛집': selectedHashtags.includes('디저트 맛집')
     };
+    try {
+      await supabase.from('reviews').insert(reviewData);
+    } catch (error) {
+      console.error(error);
+    }
+
     console.log(reviewData);
-    alert('작성 완료!');
-    navigate('/');
   };
-  console.log(selectedCafeData);
 
   return (
     <Container>
@@ -77,9 +87,10 @@ function WritePage() {
       <BoardSection>
         <ReviewSection>
           <LocationSection>
-            <CoffeeBean />
+            <CafeName>{selectedCafeData.place_name}</CafeName>
+            <CafeAddress>{selectedCafeData.address_name}</CafeAddress>
           </LocationSection>
-          <div style={{ width: '50%', float: 'right' }}>
+          <div style={{ width: '50%', float: 'right', marginLeft: '4rem' }}>
             <RatingSection>
               <div className="star-rating">
                 {[...Array(5)].map((_, index) => (
