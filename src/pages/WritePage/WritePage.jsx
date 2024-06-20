@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import CoffeeBean from '../../components/common/Icon/CoffeeBean';
 import CoffeeBeanLight from '../../components/common/Icon/CoffeeBeanLight/CoffeeBeanLight';
 import category from '../../../src/apis/category.json';
+import { useSelector } from 'react-redux';
 // import supabase from '../../apis/supabase';
 import { INITIAL_SWITCH_HASHTAG_ONOFF, SWITCH_HASHTAG_ONOFF } from '../../redux/slices/hashtagSlice';
 import {
@@ -25,6 +26,7 @@ function WritePage() {
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
   const [hashtagStates, setHashtagStates] = useState({});
+  const selectedCafeData = useSelector((state) => state.map.selectedCafeData);
 
   useEffect(() => {
     const initialHashtagStates = category.reduce((acc, curr) => {
@@ -67,6 +69,7 @@ function WritePage() {
     alert('작성 완료!');
     navigate('/');
   };
+  console.log(selectedCafeData);
 
   return (
     <Container>
