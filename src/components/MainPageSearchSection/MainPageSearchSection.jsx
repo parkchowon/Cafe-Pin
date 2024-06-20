@@ -13,7 +13,7 @@ const MainPageSearchSection = () => {
         }}
       />
       <CafeSearchInputSection>
-        <input placeholder="리뷰를 알고 싶은 카페를 검색!" />
+        <input placeholder="리뷰를 볼 카페를 검색!" />
         <SearchIcon src="src/components/common/Icon/SearchIcon.png" />
       </CafeSearchInputSection>
       <MainPageAddReviewButton></MainPageAddReviewButton>

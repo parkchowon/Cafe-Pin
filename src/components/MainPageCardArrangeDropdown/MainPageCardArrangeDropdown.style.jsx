@@ -5,6 +5,7 @@ export const CardArrangeDropDownContainer = styled.div`
   margin: 0px 0px 0px auto;
   z-index: 2;
   transition: 0.3s;
+  height: 50px;
 `;
 
 export const CardArrangeDropDownTitle = styled.div`
@@ -43,5 +44,4 @@ export const CardArrangeDropDownItem = styled.div`
     cursor: pointer;
     font-weight: 600;
   }
-  z-index: 3;
 `;

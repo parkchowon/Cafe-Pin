@@ -21,6 +21,12 @@ export const CafeSearchInputSection = styled.section`
     font-weight: 700;
     &::placeholder {
       color: #dbc5b1;
+      @media (min-width: 660px) {
+        font-size: 1.1rem;
+      }
+      @media (max-width: 660px) {
+        font-size: 0.9rem;
+      }
     }
     &:focus {
       outline: none;
@@ -35,6 +41,7 @@ export const CafeSearchInputSection = styled.section`
 export const MapIcon = styled.div`
   background-image: url('src/components/common/Icon/MapIcon.png');
   background-size: contain;
+  background-repeat: no-repeat;
   width: 64px;
   height: 64px;
   margin: auto 0px 0px 52px;
