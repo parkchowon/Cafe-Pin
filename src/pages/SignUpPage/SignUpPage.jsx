@@ -11,16 +11,12 @@ const SignUpPage = () => {
   const navigate = useNavigate(); 
   const handleSignUp = async(e) => {
     e.preventDefault();
-    // 회원가입 로직
-const nickname = e.target[0].value
+
+    const nickname = e.target[0].value
 const email = e.target[1].value
 const password = e.target[2].value
 const passwordCofirm = e.target[3].value
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-//supabase.auth.signUp 로 이메일과 비밀번호를 입력하고 data를 console 출력
-//data 에서 이메일 정보 추출 
-//추출된 이메일 정보로 우리의 유저스 테이블에 인서트 하기
 
 if (!nickname) {
   alert('닉네임을 입력하세요')
@@ -60,30 +56,22 @@ const { data, error } = await supabase.auth.signUp({
   email: email,
   password: password,
 });
-console.log(error);
 if(error) {
   alert('회원가입을 할 수 없습니다.')
   return
 } else {
-  console.log(data);
   const userId = data.session.user.id;
   const userEmail = data.session.user.email
-  console.log(userId);
   
   const {error} = await supabase
   .from('users')
   .insert({'id': userId,'nickname': nickname, 'email': userEmail});
-  console.log(error);
   if(error) {
     alert("유저테이블에 등록할 수 없습니다.");    
   } else {
     alert("회원가입 성공");    
     navigate("/auth/login");
-  }
-  
-}
-
-};
+  }}};
 
   return (
     <Wrapper>

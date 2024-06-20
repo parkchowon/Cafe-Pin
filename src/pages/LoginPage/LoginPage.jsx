@@ -5,13 +5,13 @@ import GoogleLogo from '../../components/common/Icon/GoogleLogo';
 import GithubLogo from '../../components/common/Icon/GithubLogo';
 import KakaotalkLogo from '../../components/common/Icon/KakaotalkLogo';
 import supabase from '../../apis/supabase';
-
+import {logInWithGithub, logInWithKakao} from '../../apis/loginPage.api';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
-    // 로그인 로직
+
    const email = e.target[0].value.trim();
    const password = e.target[1].value.trim();
  
@@ -52,8 +52,8 @@ const LoginPage = () => {
         <H1>SNS 로그인</H1>
         <SocialLoginContainer>
         <SocialButton><GoogleLogo/></SocialButton>
-          <SocialButton><GithubLogo/></SocialButton>
-          <SocialButton><KakaotalkLogo/></SocialButton>
+          <SocialButton onClick={logInWithGithub}><GithubLogo/></SocialButton>
+          <SocialButton onClick={logInWithKakao}><KakaotalkLogo/></SocialButton>
         </SocialLoginContainer>
         <Button type="submit">로그인</Button>
         <SignUpLink to="/auth/sign-up">아직 회원이 아니신가요?</SignUpLink>
