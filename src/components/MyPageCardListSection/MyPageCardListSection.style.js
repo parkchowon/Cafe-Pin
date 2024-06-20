@@ -1,11 +1,26 @@
 import styled from 'styled-components';
 
 export const ReviewsSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  width: 65%;
-  margin: 30px auto 300px auto;
-  gap: 35px;
+display: flex;
+flex-direction: column;
+width: 65%;
+margin: 30px auto 300px auto;
+gap: 35px;
+
+@media (max-width: 1024px) {
+  width: 80%; /* 화면 크기가 1024px 이하일 때 너비 조정 */
+}
+
+@media (max-width: 768px) {
+  width: 90%; /* 화면 크기가 768px 이하일 때 너비 조정 */
+  margin-bottom: 150px; /* 화면 크기가 768px 이하일 때 마진 조정 */
+}
+
+@media (max-width: 480px) {
+  width: 100%; /* 화면 크기가 480px 이하일 때 너비 조정 */
+  margin: 20px auto; /* 화면 크기가 480px 이하일 때 전체 마진 조정 */
+  gap: 20px; /* 화면 크기가 480px 이하일 때 갭 조정 */
+}
 `;
 
 export const ReviewsHeader = styled.h2`
@@ -32,9 +47,14 @@ export const Review = styled.div`
   border-radius: 25px;
   cursor: pointer;
   transition: 0.3s;
+
   &:hover {
     transform: scale(1.05);
     transition: 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    height: auto; /* 화면 크기가 768px 이하일 때 높이 자동 조정 */
   }
 `;
 
@@ -46,7 +66,14 @@ export const ReviewDetails = styled.div`
   margin: 50px 0px 10px 30px;
   gap: 15px;
   align-items: baseline;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem; /* 화면 크기가 768px 이하일 때 폰트 크기 조정 */
+    margin: 30px 0px 10px 20px; /* 화면 크기가 768px 이하일 때 마진 조정 */
+    gap: 10px; /* 화면 크기가 768px 이하일 때 갭 조정 */
+  }
 `;
+
 
 export const ReviewContent = styled.p`
   margin: 20px 30px auto 32px;

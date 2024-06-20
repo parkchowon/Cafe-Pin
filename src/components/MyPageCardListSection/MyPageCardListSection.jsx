@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // React Router에서 useNavigate 가져오기
 import supabase from '../../apis/supabase';
 import CoffeeBean from '../common/Icon/CoffeeBean/CoffeeBean';
 import GreyCoffeeBean from '../common/Icon/GreyCoffeeBean';
@@ -16,6 +17,8 @@ import {
 } from './MyPageCardListSection.style';
 
 const MyPageCardListSection = ({ userId }) => {
+  const navigate = useNavigate(); // useNavigate 훅 초기화
+
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -28,7 +31,7 @@ const MyPageCardListSection = ({ userId }) => {
     try {
       const { data, error } = await supabase
         .from('reviews')
-        .select('cafe_name, content, rating, created_at')
+        .select('id, cafe_name, content, rating, created_at') // id 필드 추가
         .eq('user_id', userId);
 
       if (error) {
@@ -50,16 +53,19 @@ const MyPageCardListSection = ({ userId }) => {
     return date.toLocaleDateString('ko-KR', options);
   };
 
+  const handleReviewClick = (reviewId) => {
+    navigate(`/post/${reviewId}`); // 리뷰 클릭 시 해당 리뷰의 상세 페이지로 이동
+  };
+
   return (
     <ReviewsSection>
       <ReviewsHeader>내가 작성한 리뷰</ReviewsHeader>
       <Reviews>
         {reviews.map((review, index) => (
-          <Review key={index}>
+          <Review key={index} onClick={() => handleReviewClick(review.id)}> {/* 리뷰 클릭 시 handleReviewClick 호출 */}
             <ReviewRating>
               <Rating>
-              <ReviewDate>{formatDate(review.created_at)}</ReviewDate>
-
+                <ReviewDate>{formatDate(review.created_at)}</ReviewDate>
                 {Array.from({ length: review.rating }).map((_, i) => (
                   <CoffeeBean key={i} size={30} />
                 ))}

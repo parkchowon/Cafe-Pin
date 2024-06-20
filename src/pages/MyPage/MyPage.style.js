@@ -11,8 +11,14 @@ export const ProfileSection = styled.div`
   display: flex;
   justify-content: center;
   padding: 20px;
-  border-right: 3px solid rgba(128,128,128, 0.3); 
+  border-right: 3px solid rgba(128, 128, 128, 0.3);
   box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    width: 100%; /* 화면이 작아질 경우 전체 너비를 차지하도록 설정 */
+    border-right: none; /* 작은 화면에서는 우측 경계선 제거 */
+    border-bottom: 3px solid rgba(128, 128, 128, 0.3); /* 하단 경계선 추가 */
+  }
 `;
 
 export const ProfilePicture = styled.div`
@@ -62,13 +68,13 @@ export const Circle = styled.div`
 export const Title = styled.h1`
   font-size: 40px;
   font-weight: bold;
-  color: #4D2C0E;
+  color: #4d2c0e;
   margin-top: 20px;
   margin-bottom: 30px;
 `;
 
 export const EditProfileButton = styled.button`
-  background-color: #4D2C0E;
+  background-color: #4d2c0e;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -78,7 +84,7 @@ export const EditProfileButton = styled.button`
 `;
 
 export const SaveProfileButton = styled.button`
-  background-color: #4D2C0E;
+  background-color: #4d2c0e;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -87,39 +93,19 @@ export const SaveProfileButton = styled.button`
   margin-top: 10px;
 `;
 
-export const ReviewsSection = styled.div`
-  width: 80%;
-  padding: 20px;
-`;
-
-export const ReviewsHeader = styled.h2`
-  text-align: left;
-  font-size: 32px;
-  font-weight: bold;
-  color: #4D2C0E;
-`;
-
-export const Reviews = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-export const Review = styled.div`
-  width: 23%;
-  height: 150px;
-  background-color: #dcdcdc;
-  margin: 10px 0;
-`;
-
 export const Input = styled.input`
   margin-top: 10px;
   padding: 10px;
   border-radius: 20px;
   border: 1px solid #ccc;
   background-color: #efefef;
-  width: 60%;
+  width: 80%;
   height: 10px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    width: 100%; /* 화면이 작아질 경우 전체 너비를 차지하도록 설정 */
+  }
 `;
 
 export const Label = styled.label`
@@ -135,6 +121,7 @@ export const Label = styled.label`
 export const Value = styled.p`
   margin-top: 10px;
   font-size: 20px;
+  text-align: center;
 `;
 
 export const FileInput = styled.input`
