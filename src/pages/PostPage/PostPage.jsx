@@ -2,30 +2,27 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { fetchReviewItem } from '../../apis/postPage.api';
 import { ErrorDiv, LoadingDiv } from '../../components/MainPageCardListSection/MainPageCardListSection.style';
+import CoffeeBean from '../../components/common/Icon/CoffeeBean/CoffeeBean';
+import GreyCoffeeBean from '../../components/common/Icon/GreyCoffeeBean';
+import StaticMap from '../../components/common/StaticMap/StaticMap';
 import {
-  ReviewContentsContainer,
+  CafeNameAndRatingContainer,
   PostPageReviewArea,
   PostPageTitleText,
-  ReviewRightSection,
-  ReviewCafeName,
-  CafeNameAndRatingContainer,
   RatingSection,
-  ReviewHashtagSection,
+  ReviewCafeName,
+  ReviewContentsContainer,
   ReviewHashtagItem,
-  UserNickname,
+  ReviewHashtagSection,
+  ReviewRightSection,
+  ReviewText,
   UserInfoContainer,
-  UserProfilePicture,
-  ReviewText
+  UserNickname,
+  UserProfilePicture
 } from './PostPage.style';
-import KaKaoMap from '../../components/common/KaKaoMap/KaKaoMap';
-import { useDispatch } from 'react-redux';
-import { changeCenter } from '../../redux/slices/mapSlice';
-import GreyCoffeeBean from '../../components/common/Icon/GreyCoffeeBean';
-import CoffeeBean from '../../components/common/Icon/CoffeeBean/CoffeeBean';
 
 function PostPage() {
   const { postId } = useParams();
-  const dispatch = useDispatch();
 
   const {
     data: fetchedReviewItem,
@@ -41,15 +38,6 @@ function PostPage() {
   } else if (isError) {
     return <ErrorDiv>오류 발생</ErrorDiv>;
   } else {
-    dispatch(
-      changeCenter({
-        position: {
-          lat: fetchedReviewItem.post.map_x,
-          lng: fetchedReviewItem.post.map_y
-        }
-      })
-    );
-
     const currentReviewHashtagArray = [];
     const All_HASHTAG_ARRAY = [
       '커피 맛집',
@@ -71,14 +59,11 @@ function PostPage() {
         <PostPageTitleText>Review</PostPageTitleText>
         <PostPageReviewArea>
           <ReviewContentsContainer>
-            <KaKaoMap
+            <StaticMap
               x={fetchedReviewItem.post.map_x}
               y={fetchedReviewItem.post.map_y}
               width={'700px'}
               height={'400px'}
-              draggable={false}
-              radius={false}
-              clickable={false}
             />
             <ReviewRightSection>
               <CafeNameAndRatingContainer>
