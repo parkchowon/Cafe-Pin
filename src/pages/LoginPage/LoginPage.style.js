@@ -23,8 +23,8 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   margin-left: 10px;
-    font-family: 'Playwrite CO', cursive;
-    font-size: 32px;
+  font-family: 'Playwrite CO', cursive;
+  font-size: 32px;
 `;
 
 export const Form = styled.form`
@@ -35,7 +35,6 @@ export const Form = styled.form`
   background-color: #fff;
   padding: 30px;
   border-radius: 10px;
-  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 23.5px; */
 `;
 
 export const Label = styled.label`
@@ -54,19 +53,18 @@ export const Input = styled.input`
   font-size: 14px;
   border: none;
   border-radius: 100px;
-  background-color: #EFEFEF;
+  background-color: #efefef;
   color: #808080;
   box-sizing: border-box;
-
 `;
 
 export const H1 = styled.h1`
-margin-bottom: 15px;
-margin-top: 10px;
+  margin-bottom: 15px;
+  margin-top: 10px;
   font-size: 15px;
   text-align: center;
   color: #808080;
-`
+`;
 
 export const SocialLoginContainer = styled.div`
   display: flex;
@@ -75,20 +73,19 @@ export const SocialLoginContainer = styled.div`
 `;
 
 export const SocialButton = styled.button`
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 23.5px;
+  width: 324px;
+  height: 54px;
+  padding: 5px;
+  font-size: 20px;
+  background-color: #fee500;
+  color: #3c1e1e;
   border: none;
-  margin: 0 15px;
-  background-color: white;
-
+  border-radius: 100px;
   cursor: pointer;
+  margin-bottom: 2px;
 
   &:hover {
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 23.5px;
-
+    background-color: #e6cc00;
   }
 `;
 
@@ -98,15 +95,15 @@ export const Button = styled.button`
   padding: 5px;
   font-size: 20px;
   color: white;
-  background-color: #4D2C0E;
+  background-color: #4d2c0e;
   border: none;
   border-radius: 100px;
   cursor: pointer;
   margin-bottom: 2px;
-  
+
   &:hover {
-  background-color: #DBC5B1;
-  color:  #4D2C0E;
+    background-color: #dbc5b1;
+    color: #4d2c0e;
   }
 `;
 
@@ -121,7 +118,3 @@ export const SignUpLink = styled(Link)`
     color: #808080;
   }
 `;
-
-
-
-

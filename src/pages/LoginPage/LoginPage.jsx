@@ -1,28 +1,26 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import supabase from '../../apis/supabase';
-import GithubLogo from '../../components/common/Icon/GithubLogo';
-import GoogleLogo from '../../components/common/Icon/GoogleLogo';
-import KakaotalkLogo from '../../components/common/Icon/KakaotalkLogo';
 import {
-  Button,
+  Wrapper,
   Container,
-  Form,
-  H1,
-  Input,
-  Label,
-  SignUpLink,
-  SocialButton,
-  SocialLoginContainer,
   Title,
-  Wrapper
+  Form,
+  Label,
+  Input,
+  H1,
+  SocialLoginContainer,
+  SocialButton,
+  Button,
+  SignUpLink
 } from './LoginPage.style';
+import KakaotalkLogo from '../../components/common/Icon/KakaotalkLogo';
+import supabase from '../../apis/supabase';
+import { logInWithKakao } from '../../apis/OAuthPage.api';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
-    // 로그인 로직
     const email = e.target[0].value.trim();
     const password = e.target[1].value.trim();
 
@@ -60,13 +58,7 @@ const LoginPage = () => {
           <Input type="password" name="password" placeholder="비밀번호는 6자 이상 입력하세요" required />
           <H1>SNS 로그인</H1>
           <SocialLoginContainer>
-            <SocialButton>
-              <GoogleLogo />
-            </SocialButton>
-            <SocialButton>
-              <GithubLogo />
-            </SocialButton>
-            <SocialButton>
+            <SocialButton onClick={logInWithKakao}>
               <KakaotalkLogo />
             </SocialButton>
           </SocialLoginContainer>
