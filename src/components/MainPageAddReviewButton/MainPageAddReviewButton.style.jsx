@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const StyledDiv = styled.div`
-  width: 96px;
-  height: 36px;
+export const AddReviewButton = styled.button`
+  width: 120px;
+  height: 50px;
   margin-top: 50px;
   margin-left: 0px;
 

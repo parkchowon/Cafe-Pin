@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const MainPageSearchSectionContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+`;
+
 export const CafeSearchInputSection = styled.section`
   display: flex;
   justify-content: center;
