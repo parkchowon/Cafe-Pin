@@ -41,7 +41,6 @@ function PostPage() {
   } else if (isError) {
     return <ErrorDiv>오류 발생</ErrorDiv>;
   } else {
-    console.log(fetchedReviewItem);
     dispatch(
       changeCenter({
         position: {
