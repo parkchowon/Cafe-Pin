@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CoffeeBean from '../../components/common/Icon/CoffeeBean';
 import CoffeeBeanLight from '../../components/common/Icon/CoffeeBeanLight/CoffeeBeanLight';
 import category from '../../../src/apis/category.json';
@@ -23,6 +24,7 @@ import {
 } from './WritePage.style';
 
 function WritePage() {
+  const navigate = useNavigate();
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
   const [hashtagStates, setHashtagStates] = useState({});
@@ -60,25 +62,65 @@ function WritePage() {
     const selectedHashtags = Object.keys(hashtagStates).filter((hashtag) => hashtagStates[hashtag]);
     console.log(selectedHashtags);
 
-    const reviewData = {
-      user_id: '9131f028-7f4b-432c-aed1-575b39917150',
-      content,
-      rating,
-      place_name: selectedCafeData.place_name,
-      cafe_address: selectedCafeData.address_name,
-      x: selectedCafeData.x,
-      y: selectedCafeData.y,
-      cafe_id: selectedCafeData.id,
-      '커피 맛집': selectedHashtags.includes('커피 맛집'),
-      '디저트 맛집': selectedHashtags.includes('디저트 맛집')
-    };
-    try {
-      await supabase.from('reviews').insert(reviewData);
-    } catch (error) {
-      console.error(error);
-    }
+    if (selectedCafeData) {
+      // selectedCafeData가 정의되었는지 확인
+      if (selectedHashtags.length >= 1 && selectedHashtags.length <= 5) {
+        const reviewData = {
+          user_id: '9131f028-7f4b-432c-aed1-575b39917150',
+          content,
+          rating,
+          cafe_name: selectedCafeData.place_name,
+          cafe_address: selectedCafeData.address_name,
+          map_x: selectedCafeData.x,
+          map_y: selectedCafeData.y,
+          cafe_id: selectedCafeData.id,
+          '커피 맛집': selectedHashtags.includes('커피 맛집'),
+          '디저트 맛집': selectedHashtags.includes('디저트 맛집'),
+          '분위기 좋은': selectedHashtags.includes('분위기 좋은'),
+          '데이트 명소': selectedHashtags.includes('데이트 명소'),
+          '공부하기 좋은': selectedHashtags.includes('공부하기 좋은'),
+          '단체모임 가능': selectedHashtags.includes('단체모임 가능'),
+          '해시태그 없음': false
+        };
+        try {
+          await supabase.from('reviews').insert(reviewData);
+        } catch (error) {
+          console.error(error);
+        }
 
-    console.log(reviewData);
+        console.log(reviewData);
+      } else {
+        // 해시태그가 하나도 없을 경우
+        const reviewData = {
+          user_id: '9131f028-7f4b-432c-aed1-575b39917150',
+          content,
+          rating,
+          cafe_name: selectedCafeData.place_name,
+          cafe_address: selectedCafeData.address_name,
+          map_x: selectedCafeData.x,
+          map_y: selectedCafeData.y,
+          cafe_id: selectedCafeData.id,
+          '커피 맛집': selectedHashtags.includes('커피 맛집'),
+          '디저트 맛집': selectedHashtags.includes('디저트 맛집'),
+          '분위기 좋은': selectedHashtags.includes('분위기 좋은'),
+          '데이트 명소': selectedHashtags.includes('데이트 명소'),
+          '공부하기 좋은': selectedHashtags.includes('공부하기 좋은'),
+          '단체모임 가능': selectedHashtags.includes('단체모임 가능'),
+          '해시태그 없음': true
+        };
+        try {
+          await supabase.from('reviews').insert(reviewData);
+          alert('작성 완료!');
+          navigate('/');
+        } catch (error) {
+          console.error(error);
+        }
+
+        console.log(reviewData);
+      }
+    } else {
+      console.log('selectedCafeData is undefined');
+    }
   };
 
   return (
