@@ -24,6 +24,7 @@ export const Reviews = styled.div`
 
 export const Review = styled.div`
   position: relative;
+  padding-left: 30px;
   width: 100%;
   height: 195px;
   margin-bottom: 30px;
@@ -42,7 +43,7 @@ export const ReviewDetails = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   color: #4D2C0E;
-  margin: 35px 0px 10px 30px;
+  margin: 50px 0px 10px 30px;
   gap: 15px;
   align-items: baseline;
 `;
