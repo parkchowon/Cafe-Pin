@@ -115,6 +115,7 @@ function MyPage() {
         .eq('id', userProfile.id);
 
         console.log(userProfile.id);
+        
       if (error) {
         console.error('Update error:', error.message);
         throw error;
