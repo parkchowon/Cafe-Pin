@@ -10,7 +10,9 @@ const mapSlice = createSlice({
     },
     searchText: '',
     cafeList: [],
-    selectedCafeData: {}
+    selectedCafeData: {},
+    isMarkerOpen: false,
+    viewAll: true
   },
   reducers: {
     changeCenter: (state, action) => {
@@ -25,10 +27,28 @@ const mapSlice = createSlice({
     },
     setCafeData: (state, action) => {
       state.selectedCafeData = action.payload;
+    },
+
+    setMarkerOpen: (state, action) => {
+      state.isMarkerOpen = action.payload;
+    },
+    ViewSpecificRegionRange: (state) => {
+      state.viewAll = false;
+    },
+    ViewAllRegion: (state) => {
+      state.viewAll = true;
     }
   }
 });
 
-export const { changeCenter, searchThisText, mapCafeList, setCafeData } = mapSlice.actions;
+export const {
+  changeCenter,
+  searchThisText,
+  mapCafeList,
+  setCafeData,
+  ViewSpecificRegionRange,
+  ViewAllRegion,
+  setMarkerOpen
+} = mapSlice.actions;
 
 export default mapSlice.reducer;

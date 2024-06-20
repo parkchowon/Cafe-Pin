@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const MainPageSearchSectionContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+`;
+
 export const CafeSearchInputSection = styled.section`
   display: flex;
   justify-content: center;
@@ -21,6 +29,12 @@ export const CafeSearchInputSection = styled.section`
     font-weight: 700;
     &::placeholder {
       color: #dbc5b1;
+      @media (min-width: 660px) {
+        font-size: 1.1rem;
+      }
+      @media (max-width: 660px) {
+        font-size: 0.9rem;
+      }
     }
     &:focus {
       outline: none;
@@ -32,22 +46,25 @@ export const CafeSearchInputSection = styled.section`
   }
 `;
 
-export const MapIcon = styled.div`
-  background-image: url('src/components/common/Icon/MapIcon.png');
-  background-size: contain;
+export const MapIconContainer = styled.div`
   width: 64px;
   height: 64px;
   margin: auto 0px 0px 52px;
+  cursor: pointer;
   transition: 0.3s;
   &:hover {
-    background-image: url('src/components/common/Icon/MapIcon_hover.png');
-    cursor: pointer;
+    transform: scale(1.15);
     transition: 0.3s;
   }
 `;
 
-export const SearchIcon = styled.img`
+export const SearchIconContainer = styled.div`
+  margin: auto 20px auto auto;
+
+  transition: 0.3s;
   &:hover {
     cursor: pointer;
+    transform: scale(1.15);
+    transition: 0.3s;
   }
 `;
