@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-function CoffeeBean({ size = 42 }) {
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none" xmlns="http://www.w3.org/2000/svg">
-=======
 // eslint-disable-next-line react/prop-types
 function CoffeeBean({ size }) {
   return (
     <svg width={size} height={size} viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
->>>>>>> 00903667b6b08a1cd0b26cd2ba817f07e8166492
       <path
         d="M10.5 31.5C13.0169 31.1263 15.3155 29.8601 16.9764 27.9325C18.6374 26.0049 19.5499 23.5444 19.5475 21C19.5602 17.8059 20.7188 14.7225 22.8128 12.3106C24.9068 9.89872 27.7969 8.31852 30.9575 7.85747L35.49 7.20997C35.3675 7.06997 35.2625 6.92997 35.1225 6.78997C29.4175 1.08497 18.4625 2.79997 10.6225 10.605C3.99 17.325 1.75 26.25 4.83 32.305L10.5 31.5Z"
         fill="#4D2C0E"

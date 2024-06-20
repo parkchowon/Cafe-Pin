@@ -11,9 +11,9 @@ export const SectionTitle = styled.h1`
   font-size: 2rem;
   font-weight: bold;
   color: #4D2C0E;
-  margin-top: 3rem; /* 여백 추가 */
+  margin-top: 3rem; 
   margin-bottom: 1.5rem;
-  text-align: center; /* 가운데 정렬 */
+  text-align: center; 
 `;
 
 export const BoardSection = styled.div`
@@ -38,22 +38,23 @@ width: 800px;
   }
 `;
 
+export const ReviewSection = styled.div`
+    display: flex;
+    margin: 2rem 2rem; 
+    justify-content: center;
+`;
+
 export const LocationSection = styled.div`
-flex-basis: 30%;
-  background-color: #f5f5f5;
+width: 50%;
+float: left;
   padding: 1.5rem;
   border-radius: 8px;
   text-align: center;
 `;
 
-export const ReviewSection = styled.div`
-    display: flex;
-    margin: 2rem 2rem; /* 상하 2rem, 좌우 0 */
-`;
-
 export const RatingSection = styled.div`
 display: flex;
-justify-content: center; // 가로 중앙 정렬
+justify-content: center; 
 `;
 
 export const HashtagContainer = styled.div`
@@ -62,10 +63,40 @@ export const HashtagContainer = styled.div`
   gap: 0.5rem;
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
-  width: 100%; // 가로폭을 100%로 설정
-  max-width: 500px; // 최대 가로폭을 800px로 제한
-  justify-content: flex-start; // 좌측 정렬
+  width: 100%; 
+  max-width: 500px; 
+  justify-content: flex-start; 
 `;
+
+export const HashtagButton = styled.button`
+  background-color: ${(props) => props.isActive ? '#DBC5B1' : '#FFFFFF'};
+  color: ${(props) => props.isActive ? '#FFFFFF' : '#DBC5B1'};
+  padding: 2px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border: 2px solid #DBC5B1;
+
+  &:hover:not(.active) {
+    background-color: #DBC5B1;
+    color: #FFFFFF;
+  }
+
+  &.active {
+    background-color: #DBC5B1;
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: #DBC5B1;
+      color: #FFFFFF;
+    }
+  }
+`;
+
+
+
 
 export const Hashtag = styled.button`
   background-color: ${(props) => props.isSelected ? '#DBC5B1' : '#FFFFFF'};
@@ -97,7 +128,6 @@ export const Hashtag = styled.button`
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
 `;
 
 export const Input = styled.input`
@@ -110,15 +140,15 @@ export const Input = styled.input`
   max-width: 500px;
   padding: 18px 16px;
   height: 150px;
-  text-align: left; // 텍스트 정렬을 왼쪽으로 설정
+  text-align: left; 
 `;
 
 export const ButtonContainer = styled.div`
 width: 111%;
-max-width: 500px; // Input과 동일한 최대 가로폭
+max-width: 500px; 
   margin-top: 16px;
   display: flex;
-  justify-content: flex-end; // 오른쪽 정렬
+  justify-content: flex-end; 
 `;
 
 export const CreateBtn = styled.button`
@@ -126,12 +156,13 @@ background-color: #4D2C0E;
   color: #fff;
   border: none;
   border-radius: 20px;
-  padding: 12px 16px;
-  font-size: 16px;
+  padding: 14px 16px;
+  font-size: 18px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 100%; // 부모 컨테이너의 100% 사용
-  max-width: 500px; // Input과 동일한 최대 가로폭
+  width: 100%; 
+  max-width: 500px; 
+  font-weight: bold;
 
   &:hover {
     background-color: #DBC5B1;
