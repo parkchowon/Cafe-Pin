@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import { StyledDiv } from './MainPageAddReviewButton.style';
+import { AddReviewButton } from './MainPageAddReviewButton.style';
 
 const MainPageAddReviewButton = () => {
   const navigate = useNavigate();
   return (
-    <StyledDiv
+    <AddReviewButton
       onClick={() => {
         navigate('/select-cafe');
       }}
-    >{`+ 리뷰 작성`}</StyledDiv>
+    >{`+ 리뷰 작성`}</AddReviewButton>
   );
 };
 
