@@ -6,9 +6,10 @@ import LoginPage from '../pages/LoginPage';
 import MapSearchPage from '../pages/MapSearchPage';
 import MyPage from '../pages/MyPage';
 import PostPage from '../pages/PostPage';
+import SelectCafePage from '../pages/SelectCafePage/SelectCafePage';
 import SignUpPage from '../pages/SignUpPage';
 import WritePage from '../pages/WritePage';
-
+import OAuthRedirectPage from '../pages/OAuthRedirectPage/OAuthRedirectPage';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -33,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: 'search',
         element: <MapSearchPage />
+      },
+      {
+        path: 'select-cafe',
+        element: <SelectCafePage />
+      },
+      {
+        path: 'auth/OAuthRedirectPage',
+        element: <OAuthRedirectPage />
       }
     ]
   },

@@ -1,9 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
-import postSlice from './slices/postSlice';
+import arrangeOptionSlice from './slices/arrangeOptionSlice';
+import cafeSearchTextSlice from './slices/cafeSearchTextSlice';
+import hashtagSlice from './slices/hashtagSlice';
+import mapSlice from './slices/mapSlice';
+import userSlice from './slices/userSlice';
 
 const store = configureStore({
   reducer: {
-    post: postSlice
+    hashtag: hashtagSlice,
+    arrangeOption: arrangeOptionSlice,
+    map: mapSlice,
+    cafeSearchText: cafeSearchTextSlice,
+    user: userSlice
   }
 });
 
