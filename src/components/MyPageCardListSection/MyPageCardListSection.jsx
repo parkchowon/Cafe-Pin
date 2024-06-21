@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // React Router에서 useNavigate 가져오기
+import { useNavigate } from 'react-router-dom';
 import supabase from '../../apis/supabase';
 import CoffeeBean from '../common/Icon/CoffeeBean/CoffeeBean';
 import GreyCoffeeBean from '../common/Icon/GreyCoffeeBean';
@@ -14,11 +14,12 @@ import {
   ReviewRating,
   ReviewDate,
   Rating,
-  NoReviewsMessage, // NoReviewsMessage 스타일 추가
+  NoReviewsMessage,
+  DeleteButton
 } from './MyPageCardListSection.style';
 
 const MyPageCardListSection = ({ userId }) => {
-  const navigate = useNavigate(); // useNavigate 훅 초기화
+  const navigate = useNavigate();
 
   const [reviews, setReviews] = useState([]);
 
@@ -32,7 +33,7 @@ const MyPageCardListSection = ({ userId }) => {
     try {
       const { data, error } = await supabase
         .from('reviews')
-        .select('id, cafe_name, content, rating, created_at') // id 필드 추가
+        .select('id, cafe_name, content, rating, created_at')
         .eq('user_id', userId);
 
       if (error) {
@@ -48,6 +49,30 @@ const MyPageCardListSection = ({ userId }) => {
     }
   };
 
+  const deleteReview = async (reviewId) => {
+    try {
+      const confirmDelete = window.confirm('이 리뷰를 삭제하시겠습니까?');
+
+      if (!confirmDelete) {
+        return;
+      }
+
+      const { error } = await supabase
+        .from('reviews')
+        .delete()
+        .eq('id', reviewId);
+
+      if (error) {
+        console.error('리뷰를 삭제하는데 실패했습니다:', error.message);
+        return;
+      }
+
+      setReviews(reviews.filter((review) => review.id !== reviewId));
+    } catch (error) {
+      console.error('리뷰를 삭제하는 중 오류가 발생했습니다:', error.message);
+    }
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
@@ -55,7 +80,7 @@ const MyPageCardListSection = ({ userId }) => {
   };
 
   const handleReviewClick = (reviewId) => {
-    navigate(`/post/${reviewId}`); // 리뷰 클릭 시 해당 리뷰의 상세 페이지로 이동
+    navigate(`/post/${reviewId}`);
   };
 
   return (
@@ -64,22 +89,25 @@ const MyPageCardListSection = ({ userId }) => {
       {reviews.length > 0 ? (
         <Reviews>
           {reviews.map((review, index) => (
-            <Review key={index} onClick={() => handleReviewClick(review.id)}> {/* 리뷰 클릭 시 handleReviewClick 호출 */}
-              <ReviewRating>
-                <Rating>
-                  <ReviewDate>{formatDate(review.created_at)}</ReviewDate>
-                  {Array.from({ length: review.rating }).map((_, i) => (
-                    <CoffeeBean key={i} size={30} />
-                  ))}
-                  {Array.from({ length: 5 - review.rating }).map((_, i) => (
-                    <GreyCoffeeBean key={i} size={30} />
-                  ))}
-                </Rating>
-              </ReviewRating>
-              <ReviewDetails>
-                <div>{review.cafe_name}</div>
-              </ReviewDetails>
-              <ReviewContent>{review.content}</ReviewContent>
+            <Review key={index}>
+              <div onClick={() => handleReviewClick(review.id)} style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                <ReviewRating>
+                  <Rating>
+                    <ReviewDate>{formatDate(review.created_at)}</ReviewDate>
+                    {Array.from({ length: review.rating }).map((_, i) => (
+                      <CoffeeBean key={i} size={30} />
+                    ))}
+                    {Array.from({ length: 5 - review.rating }).map((_, i) => (
+                      <GreyCoffeeBean key={i} size={30} />
+                    ))}
+                  </Rating>
+                </ReviewRating>
+                <ReviewDetails>
+                  <div>{review.cafe_name}</div>
+                </ReviewDetails>
+                <ReviewContent>{review.content}</ReviewContent>
+              </div>
+              <DeleteButton onClick={() => deleteReview(review.id)}>삭제</DeleteButton>
             </Review>
           ))}
         </Reviews>

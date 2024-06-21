@@ -1,23 +1,22 @@
 import styled from 'styled-components';
 
 export const ReviewsSection = styled.section`
-display: flex;
-flex-direction: column;
-width: 70%;
-margin: 30px auto 300px auto;
-gap: 35px;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 30px auto 300px auto;
+  gap: 35px;
 
-@media (max-width: 1024px) {
-  width: 80%; 
-  margin-bottom: 150px;
+  @media (max-width: 1024px) {
+    width: 80%; 
+    margin-bottom: 150px;
+  }
 
-}
-
-@media (max-width: 480px) {
-  width: 100%;
-  margin: 20px auto;
-  gap: 20px;
-}
+  @media (max-width: 480px) {
+    width: 100%;
+    margin: 20px auto;
+    gap: 20px;
+  }
 `;
 
 export const ReviewsHeader = styled.h2`
@@ -33,7 +32,6 @@ export const Reviews = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   max-height: 100vh;
-overflow-y: 90%;
 `;
 
 export const Review = styled.div`
@@ -72,7 +70,6 @@ export const ReviewDetails = styled.div`
     gap: 10px; /* 화면 크기가 768px 이하일 때 갭 조정 */
   }
 `;
-
 
 export const ReviewContent = styled.p`
   margin: 20px 30px auto 32px;
@@ -117,3 +114,15 @@ export const NoReviewsMessage = styled.div`
   color: #4D2C0E;
 `;
 
+export const DeleteButton = styled.button`
+  background-color: #4D2C0E;
+  color: white;
+  border: none;
+  width: 60px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 30px;
+  right: 50px;
+`;
