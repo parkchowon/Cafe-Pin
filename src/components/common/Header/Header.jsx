@@ -13,7 +13,6 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state) => state.user.userData);
 
-  console.log(user.id);
   const { data: userData, isPending } = useQuery({
     queryKey: ['user', user.id],
     queryFn: () => {

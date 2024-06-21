@@ -23,18 +23,14 @@ const uploadFile = async (file) => {
   const fileName = `${uuidv4()}.${fileExt}`;
   const filePath = `public/${fileName}`;
 
-  const { data: avatarData, error: uploadError } = await supabase.storage
-    .from('avatars')
-    .upload(filePath, file);
+  const { data: avatarData, error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file);
 
   if (uploadError) {
     console.error('Error uploading file:', uploadError.message);
     return null;
   }
 
-  const { data: publicUrlData, error: urlError } = supabase.storage
-    .from('avatars')
-    .getPublicUrl(avatarData.path);
+  const { data: publicUrlData, error: urlError } = supabase.storage.from('avatars').getPublicUrl(avatarData.path);
 
   if (urlError) {
     console.error('Error getting public URL:', urlError.message);
@@ -57,13 +53,11 @@ function MyPage() {
 
   const fetchUserProfile = async () => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user }
+      } = await supabase.auth.getUser();
       if (user) {
-        const { data, error } = await supabase
-          .from('users')
-          .select('*')
-          .eq('id', user.id)
-          .single();
+        const { data, error } = await supabase.from('users').select('*').eq('id', user.id).single();
 
         if (error) {
           console.error('데이터를 가져오는데에 실패했습니다:', error.message);
@@ -94,10 +88,9 @@ function MyPage() {
       if (image instanceof File) {
         profileUrl = await uploadFile(image);
       }
-      console.log(profileUrl);
 
       const { error: authError } = await supabase.auth.updateUser({
-        email,
+        email
       });
 
       if (authError) {
@@ -109,19 +102,16 @@ function MyPage() {
         .from('users')
         .update({
           profile_url: profileUrl,
-          nickname,
+          nickname
         })
         .eq('id', userProfile.id);
 
-        console.log(userProfile.id);
-        
       if (error) {
         console.error('Update error:', error.message);
         throw error;
       }
 
       if (data) {
-        console.log('프로필이 성공적으로 업데이트되었습니다:', data);
         setUserProfile({ ...userProfile, profile_url: profileUrl, nickname, email });
       }
     } catch (error) {
@@ -149,9 +139,15 @@ function MyPage() {
         <ProfilePicture>
           <Title>마이 페이지</Title>
           <Circle>
-            <img 
-              src={image ? (typeof image === 'string' ? image : URL.createObjectURL(image)) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s'} 
-              alt="프로필 사진" 
+            <img
+              src={
+                image
+                  ? typeof image === 'string'
+                    ? image
+                    : URL.createObjectURL(image)
+                  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s'
+              }
+              alt="프로필 사진"
             />
             {isEditing && (
               <label>
