@@ -13,13 +13,16 @@ export const ProfileSection = styled.div`
   padding: 20px;
   border-right: 3px solid rgba(128, 128, 128, 0.3);
   box-sizing: border-box;
+  height: 100vh; /* 전체 높이를 차지하도록 설정 */
 
   @media (max-width: 768px) {
     width: 100%; /* 화면이 작아질 경우 전체 너비를 차지하도록 설정 */
     border-right: none; /* 작은 화면에서는 우측 경계선 제거 */
     border-bottom: 3px solid rgba(128, 128, 128, 0.3); /* 하단 경계선 추가 */
+    height: auto; /* 작은 화면에서는 높이 자동 설정 */
   }
 `;
+
 
 export const ProfilePicture = styled.div`
   display: flex;

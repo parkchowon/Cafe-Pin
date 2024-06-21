@@ -14,6 +14,7 @@ import {
   ReviewRating,
   ReviewDate,
   Rating,
+  NoReviewsMessage, // NoReviewsMessage 스타일 추가
 } from './MyPageCardListSection.style';
 
 const MyPageCardListSection = ({ userId }) => {
@@ -60,27 +61,31 @@ const MyPageCardListSection = ({ userId }) => {
   return (
     <ReviewsSection>
       <ReviewsHeader>내가 작성한 리뷰</ReviewsHeader>
-      <Reviews>
-        {reviews.map((review, index) => (
-          <Review key={index} onClick={() => handleReviewClick(review.id)}> {/* 리뷰 클릭 시 handleReviewClick 호출 */}
-            <ReviewRating>
-              <Rating>
-                <ReviewDate>{formatDate(review.created_at)}</ReviewDate>
-                {Array.from({ length: review.rating }).map((_, i) => (
-                  <CoffeeBean key={i} size={30} />
-                ))}
-                {Array.from({ length: 5 - review.rating }).map((_, i) => (
-                  <GreyCoffeeBean key={i} size={30} />
-                ))}
-              </Rating>
-            </ReviewRating>
-            <ReviewDetails>
-              <div>{review.cafe_name}</div>
-            </ReviewDetails>
-            <ReviewContent>{review.content}</ReviewContent>
-          </Review>
-        ))}
-      </Reviews>
+      {reviews.length > 0 ? (
+        <Reviews>
+          {reviews.map((review, index) => (
+            <Review key={index} onClick={() => handleReviewClick(review.id)}> {/* 리뷰 클릭 시 handleReviewClick 호출 */}
+              <ReviewRating>
+                <Rating>
+                  <ReviewDate>{formatDate(review.created_at)}</ReviewDate>
+                  {Array.from({ length: review.rating }).map((_, i) => (
+                    <CoffeeBean key={i} size={30} />
+                  ))}
+                  {Array.from({ length: 5 - review.rating }).map((_, i) => (
+                    <GreyCoffeeBean key={i} size={30} />
+                  ))}
+                </Rating>
+              </ReviewRating>
+              <ReviewDetails>
+                <div>{review.cafe_name}</div>
+              </ReviewDetails>
+              <ReviewContent>{review.content}</ReviewContent>
+            </Review>
+          ))}
+        </Reviews>
+      ) : (
+        <NoReviewsMessage>아직 내가 작성한 리뷰가 없습니다</NoReviewsMessage>
+      )}
     </ReviewsSection>
   );
 };

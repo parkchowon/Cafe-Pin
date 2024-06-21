@@ -81,7 +81,6 @@ function MyPage() {
       console.error('사용자 프로필 정보를 가져오는 중 오류가 발생했습니다:', error.message);
     }
   };
-
   const handleEditClick = () => {
     setIsEditing(true);
   };

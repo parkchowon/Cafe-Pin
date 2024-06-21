@@ -3,23 +3,20 @@ import styled from 'styled-components';
 export const ReviewsSection = styled.section`
 display: flex;
 flex-direction: column;
-width: 65%;
+width: 70%;
 margin: 30px auto 300px auto;
 gap: 35px;
 
 @media (max-width: 1024px) {
-  width: 80%; /* 화면 크기가 1024px 이하일 때 너비 조정 */
-}
+  width: 80%; 
+  margin-bottom: 150px;
 
-@media (max-width: 768px) {
-  width: 90%; /* 화면 크기가 768px 이하일 때 너비 조정 */
-  margin-bottom: 150px; /* 화면 크기가 768px 이하일 때 마진 조정 */
 }
 
 @media (max-width: 480px) {
-  width: 100%; /* 화면 크기가 480px 이하일 때 너비 조정 */
-  margin: 20px auto; /* 화면 크기가 480px 이하일 때 전체 마진 조정 */
-  gap: 20px; /* 화면 크기가 480px 이하일 때 갭 조정 */
+  width: 100%;
+  margin: 20px auto;
+  gap: 20px;
 }
 `;
 
@@ -28,13 +25,15 @@ export const ReviewsHeader = styled.h2`
   font-weight: bold;
   color: #4D2C0E;
   margin-top: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 export const Reviews = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  max-height: 100vh;
+overflow-y: 90%;
 `;
 
 export const Review = styled.div`
@@ -109,5 +108,12 @@ export const ReviewDate = styled.p`
   font-weight: normal;
   font-size: 1rem;
   color: grey;
+`;
+
+export const NoReviewsMessage = styled.div`
+  text-align: center;
+  margin-top: 30px;
+  font-size: 30px;
+  color: #4D2C0E;
 `;
 
