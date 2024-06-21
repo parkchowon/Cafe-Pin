@@ -65,6 +65,8 @@ const MainPageCardListSection = () => {
         : () => fetchReviewsByOldest(onlyTrueHashtagObj, idsOfCafesInMap, viewAll, cafeSearchText)
   });
   const navigate = useNavigate();
+
+  console.log(fetchedReviews);
   if (isPending) {
     return <LoadingDiv>로딩 중...</LoadingDiv>;
   } else if (isError) {
