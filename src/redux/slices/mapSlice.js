@@ -5,8 +5,8 @@ const mapSlice = createSlice({
   initialState: {
     level: 3,
     position: {
-      lat: 33.450701,
-      lng: 126.570667
+      lat: 37.49799993466257,
+      lng: 127.0275987857109
     },
     searchText: '',
     cafeList: [],
@@ -37,6 +37,15 @@ const mapSlice = createSlice({
     },
     ViewAllRegion: (state) => {
       state.viewAll = true;
+    },
+    setCurrentPositionAddress: (state, action) => {
+      state.address = action.payload;
+    },
+    ResetPositionToDefault: (state) => {
+      state.position = {
+        lat: 37.49799993466257,
+        lng: 127.0275987857109
+      };
     }
   }
 });
@@ -48,7 +57,9 @@ export const {
   setCafeData,
   ViewSpecificRegionRange,
   ViewAllRegion,
-  setMarkerOpen
+  setMarkerOpen,
+  setCurrentPositionAddress,
+  ResetPositionToDefault
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

@@ -1,7 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Circle, Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCenter, mapCafeList, setCafeData, setMarkerOpen } from '../../../redux/slices/mapSlice';
+import {
+  ResetPositionToDefault,
+  changeCenter,
+  mapCafeList,
+  setCafeData,
+  setCurrentPositionAddress,
+  setMarkerOpen
+} from '../../../redux/slices/mapSlice';
 import { Address, CloseBtn, MapContainer, MarkerDiv, Phone, RoadAdd, Title } from './KaKaoMap.style';
 
 function KaKaoMap(data) {
@@ -20,6 +27,7 @@ function KaKaoMap(data) {
 
   //원 범위
   useEffect(() => {
+    dispatch(ResetPositionToDefault());
     switch (level) {
       case 1:
         setLength(75);
@@ -135,6 +143,7 @@ function KaKaoMap(data) {
     const callback = function (result, status) {
       if (status === window.kakao.maps.services.Status.OK) {
         setAddress(result[0].address.address_name);
+        dispatch(setCurrentPositionAddress(result[0].address.address_name));
       } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
         console.log('결과가 존재하지 않습니다.');
         return;
