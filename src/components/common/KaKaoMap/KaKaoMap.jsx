@@ -25,9 +25,12 @@ function KaKaoMap(data) {
   const [address, setAddress] = useState('');
   const [length, setLength] = useState(500);
 
-  //원 범위
   useEffect(() => {
     dispatch(ResetPositionToDefault());
+  }, []);
+
+  //원 범위
+  useEffect(() => {
     switch (level) {
       case 1:
         setLength(75);
