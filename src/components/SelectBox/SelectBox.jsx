@@ -1,18 +1,29 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../apis/user.api';
+import { fetchUserData } from '../../redux/slices/userSlice';
 import { Item, Wrapper } from './SelectBox.style';
 
 function SelectBox() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const user = useSelector((state) => state.user.userData);
+
+  const { mutateAsync: logout } = useMutation({
+    mutationFn: async () => await logoutUser(),
+    onSuccess: () => {
+      dispatch(fetchUserData({}));
+      queryClient.invalidateQueries(['user']);
+    }
+  });
 
   const handleClick = (e) => {
     const path = e.target.id;
     if (path == '') {
-      logoutUser();
-      window.location.reload();
+      logout();
     }
     navigate(path);
   };
