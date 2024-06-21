@@ -88,7 +88,7 @@ export const ReviewContent = styled.p`
 
 export const ReviewRating = styled.div`
   position: absolute;
-  top: 10px;
+  top: 25px;
   right: 10px;
   display: flex;
   align-items: center;
@@ -113,6 +113,20 @@ export const NoReviewsMessage = styled.div`
   font-size: 30px;
   color: #4D2C0E;
 `;
+
+export const EditButton = styled.button`
+  background-color: #4D2C0E;
+  color: white;
+  border: none;
+  width: 60px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 30px;
+  right: 120px;
+`;
+
 
 export const DeleteButton = styled.button`
   background-color: #4D2C0E;
