@@ -23,7 +23,7 @@ function SelectBox() {
   const handleClick = (e) => {
     const path = e.target.id;
     if (path == '') {
-      logout();
+      return logout();
     }
     navigate(path);
   };
