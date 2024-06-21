@@ -62,7 +62,6 @@ function WritePage() {
     }
 
     const selectedHashtags = Object.keys(hashtagStates).filter((hashtag) => hashtagStates[hashtag]);
-    console.log(selectedHashtags);
 
     // selectedCafeData가 정의되었는지 확인
     if (selectedCafeData) {

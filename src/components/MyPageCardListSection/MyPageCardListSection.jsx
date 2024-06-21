@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import supabase from '../../apis/supabase';
 import CoffeeBean from '../common/Icon/CoffeeBean/CoffeeBean';
 import GreyCoffeeBean from '../common/Icon/GreyCoffeeBean';
+import Modal from 'react-modal';
 
 import {
   ReviewsSection,
@@ -15,13 +16,27 @@ import {
   ReviewDate,
   Rating,
   NoReviewsMessage,
+  EditButton,
   DeleteButton
 } from './MyPageCardListSection.style';
+
+import {
+  CustomModal,
+  ModalHeader,
+  ModalContent,
+  ModalActions,
+  ModalButton,
+  ModalInput,
+  ModalTextArea,
+  Container
+} from './ModalStyles';
 
 const MyPageCardListSection = ({ userId }) => {
   const navigate = useNavigate();
 
   const [reviews, setReviews] = useState([]);
+  const [selectedReview, setSelectedReview] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (userId) {
@@ -57,10 +72,7 @@ const MyPageCardListSection = ({ userId }) => {
         return;
       }
 
-      const { error } = await supabase
-        .from('reviews')
-        .delete()
-        .eq('id', reviewId);
+      const { error } = await supabase.from('reviews').delete().eq('id', reviewId);
 
       if (error) {
         console.error('리뷰를 삭제하는데 실패했습니다:', error.message);
@@ -83,6 +95,38 @@ const MyPageCardListSection = ({ userId }) => {
     navigate(`/post/${reviewId}`);
   };
 
+  const handleEditReview = (review) => {
+    setSelectedReview(review);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setSelectedReview(null);
+  };
+
+  const handleSaveChanges = async () => {
+    try {
+      if (!selectedReview) return;
+
+      const { id, rating, content } = selectedReview;
+
+      const { error } = await supabase.from('reviews').update({ rating, content }).eq('id', id);
+
+      if (error) {
+        console.error('리뷰를 수정하는데 실패했습니다:', error.message);
+        return;
+      }
+
+      setReviews(reviews.map((review) => (review.id === id ? { ...review, rating, content } : review)));
+
+      setModalOpen(false);
+      setSelectedReview(null);
+    } catch (error) {
+      console.error('리뷰를 수정하는 중 오류가 발생했습니다:', error.message);
+    }
+  };
+
   return (
     <ReviewsSection>
       <ReviewsHeader>내가 작성한 리뷰</ReviewsHeader>
@@ -90,7 +134,10 @@ const MyPageCardListSection = ({ userId }) => {
         <Reviews>
           {reviews.map((review, index) => (
             <Review key={index}>
-              <div onClick={() => handleReviewClick(review.id)} style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+              <div
+                onClick={() => handleReviewClick(review.id)}
+                style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
+              >
                 <ReviewRating>
                   <Rating>
                     <ReviewDate>{formatDate(review.created_at)}</ReviewDate>
@@ -107,12 +154,41 @@ const MyPageCardListSection = ({ userId }) => {
                 </ReviewDetails>
                 <ReviewContent>{review.content}</ReviewContent>
               </div>
+              <EditButton onClick={() => handleEditReview(review)}>수정</EditButton>
               <DeleteButton onClick={() => deleteReview(review.id)}>삭제</DeleteButton>
             </Review>
           ))}
         </Reviews>
       ) : (
         <NoReviewsMessage>아직 내가 작성한 리뷰가 없습니다</NoReviewsMessage>
+      )}
+
+      {selectedReview && (
+        <CustomModal isOpen={modalOpen} onRequestClose={handleCloseModal} contentLabel="리뷰 수정">
+          <ModalHeader>리뷰 수정</ModalHeader>
+          <ModalContent>
+            <Container>
+              <p>별점:</p>
+              <ModalInput
+                type="number"
+                value={selectedReview.rating}
+                onChange={(e) => setSelectedReview({ ...selectedReview, rating: parseInt(e.target.value) })}
+              />
+            </Container>
+            <Container>
+              <p>리뷰 내용:</p>
+              <ModalTextArea
+                value={selectedReview.content}
+                onChange={(e) => setSelectedReview({ ...selectedReview, content: e.target.value })}
+                rows={5}
+              />
+            </Container>
+          </ModalContent>
+          <ModalActions>
+            <ModalButton onClick={handleSaveChanges}>저장</ModalButton>
+            <ModalButton onClick={handleCloseModal}>취소</ModalButton>
+          </ModalActions>
+        </CustomModal>
       )}
     </ReviewsSection>
   );
